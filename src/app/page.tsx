@@ -14,7 +14,7 @@ export default function Home() {
           <TabsTrigger value="password">เครื่องคิดเลข</TabsTrigger>
         </TabsList>
       </Tabs>
-      <Input placeholder="test"></Input>
+      <Input placeholder="test" />
     </div>
   );
 }
