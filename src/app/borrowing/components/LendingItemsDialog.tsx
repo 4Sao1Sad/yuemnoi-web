@@ -12,9 +12,16 @@ import {
 } from "@yuemnoi/components/ui/dialog"
 import { FormField, FormItem, FormLabel, FormControl, FormMessage, Form } from "@yuemnoi/components/ui/form";
 import { cn } from "@yuemnoi/lib/utils/utils";
-import { it } from "node:test";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+
+export interface BorrowingPostCardProps {
+    id: string;
+    name: string;
+    surName: string;
+    description: string;
+    createdAt: Date;
+}
 interface LendingItem {
     id: string;
     name: string;
@@ -23,13 +30,13 @@ interface LendingItem {
     ownerName: string
 }
 interface LendingItemsDialogProps {
-    children?: React.ReactNode;
     lendingItems: LendingItem[];
+    borrowPostCard: BorrowingPostCardProps
 }
 const FormSchema = z.object({
     itemId: z.string(),
 })
-export default function LendingItemsDialog({ lendingItems: LendingItems, children: ButtonTrigger }: LendingItemsDialogProps) {
+export default function LendingItemsDialog({ lendingItems: LendingItems, borrowPostCard }: LendingItemsDialogProps) {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
     })
@@ -39,7 +46,17 @@ export default function LendingItemsDialog({ lendingItems: LendingItems, childre
     return (
         <Dialog >
             <DialogTrigger asChild>
-                {ButtonTrigger}
+                <Button key={borrowPostCard.id} className="h-fit flex flex-col items-start  px-4 py-3 space-y-2 shadow-lg rounded-lg bg-white text-black hover:bg-gray-50">
+                    <div className="flex flex-row justify-between w-full items-center">
+                        <h2 className="text-md font-medium line-clamp-1 break-all ">{`${borrowPostCard.name} ${borrowPostCard.surName}`}</h2>
+                        <div className="flex flex-row justify-between space-x-1  items-center">
+                            <span className="text-md font-normal text-gray-500">{formatTimeAgo(borrowPostCard.createdAt)}</span>
+                        </div>
+                    </div>
+                    <div className="text-xl">
+                        {borrowPostCard.description}
+                    </div>
+                </Button>
             </DialogTrigger>
             <DialogContent className="rounded-lg" >
                 <DialogHeader>
@@ -63,7 +80,7 @@ export default function LendingItemsDialog({ lendingItems: LendingItems, childre
                                                 LendingItems.map((item) => (
                                                     <FormItem className="flex items-center justify-center  " key={item.id}>
                                                         <FormControl >
-                                                            <RadioGroupItem value={item.id} className="bg-white flex flex-1 h-fit flex-row justify-start aria-checked:bg-orange-400 space-x-3 px-4 py-2 rounded-md shadow-md" >
+                                                            <RadioGroupItem value={item.id} className="bg-white flex flex-1 h-fit flex-row justify-start aria-checked:bg-orange-400 space-x-3 px-4 py-2 rounded-md shadow-md hover:bg-orange-300" >
                                                                 <img src={item.imageUrl} alt={item.name} className="h-20 w-20" />
                                                                 <div className="flex justify-center items-start flex-1 flex-col">
                                                                     <h2 className="text-xl font-semibold line-clamp-1 break-all text-black">{`${item.name} `}</h2>
@@ -93,4 +110,43 @@ export default function LendingItemsDialog({ lendingItems: LendingItems, childre
             </DialogContent>
         </Dialog>
     );
+}
+
+export function formatTimeAgo(date: Date | string): string {
+
+    // Initialize a default date as the current date
+    let _date: Date = new Date();
+
+    // Check if the input is a string and convert it to a Date object
+    if (typeof date === "string") {
+        _date = new Date(date)
+    } else {
+        _date = date
+    }
+
+    // Calculate the time difference in seconds
+    const seconds: number = Math.floor((new Date().getTime() - _date.getTime()) / 1000);
+
+    // Define intervals for different time units in seconds
+    const intervals: Record<string, number> = {
+        year: 31536000,
+        month: 2628000,
+        day: 86400,
+        hour: 3600,
+        minute: 60,
+    };
+
+    // Iterate through the intervals and determine the appropriate unit
+    for (const [unit, secondsInUnit] of Object.entries(intervals)) {
+        const interval: number = Math.floor(seconds / secondsInUnit);
+        if (interval > 1) {
+            return `${interval} ${unit}s ago`;
+        }
+        if (interval === 1) {
+            return `${interval} ${unit} ago`;
+        }
+    }
+
+    // If no larger unit is found, return "just now"
+    return "just now";
 }
