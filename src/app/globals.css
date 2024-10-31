@@ -1,21 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300;400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+    --font-sans: "IBM Plex Sans Thai";
+    --font-looped: "IBM Plex Sans Thai Looped";
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+    --font-size-h1: 2.5rem;
+    --font-size-h2: 2rem;
+    --font-size-h3: 1.5rem;
+    --font-size-h4: 1.25rem;
+    --font-size-h5: 1rem;
+    --font-size-h6: 0.875rem;
+    --font-size-tiny: 0.75rem;
+    --font-size-body1: 1rem;
+    --font-size-body2: 0.875rem;
+    --font-size-body3: 0.75rem;
+
+    --radius: 0.5rem;
+
+    --primary: #df711b;
+    --primary-hover: #a45415;
+
+    --secondary-hover: #faeccf;
+
+    --foreground: #ffffff;
+    --background: #000000;
+
+    --input-outline: #cbd5e1;
+  }
+
+  @layer base {
+    .h1 {
+      @apply text-h1 font-sans;
+    }
+
+    .h2 {
+      @apply text-h2 font-sans;
+    }
+
+    .h3 {
+      @apply text-h3 font-sans;
+    }
+
+    .h4 {
+      @apply text-h4 font-sans;
+    }
+
+    .h5 {
+      @apply text-h5 font-sans;
+    }
+
+    .h6 {
+      @apply text-h6 font-sans;
+    }
+
+    .tiny {
+      @apply text-tiny font-sans;
+    }
+
+    .body1 {
+      @apply text-body1 font-looped;
+    }
+
+    .body2 {
+      @apply text-body2 font-looped;
+    }
+
+    .body3 {
+      @apply text-body3 font-looped;
+    }
+  }
 }
