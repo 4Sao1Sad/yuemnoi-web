@@ -8,24 +8,23 @@ export default function BorrowingPage() {
     return <div className=" min-h-screen max-w-screen w-screen flex flex-col">
 
         Borrowing Page
-        <Button>artnsaeti</Button>
-        <LendingItemsDialog lendingItems={[{ id: "1", name: "1", imageUrl: imageUrl,ownerName:"Bruce",status:true },
-        { id: "2", name: "2", imageUrl: imageUrl,ownerName:"Bruce",status:true },
-        { id: "3", name: "3", imageUrl: imageUrl,ownerName:"Bruce",status:true },
-        { id: "4", name: "4", imageUrl: imageUrl,ownerName:"Bruce",status:true },
-        { id: "5", name: "5", imageUrl: imageUrl,ownerName:"Bruce",status:true },
-        { id: "6", name: "6", imageUrl: imageUrl,ownerName:"Bruce",status:true },
-        { id: "7", name: "7", imageUrl: imageUrl,ownerName:"Bruce",status:true },
-        { id: "8", name: "8", imageUrl: imageUrl,ownerName:"Bruce",status:true },
-        { id: "9", name: "9", imageUrl: imageUrl,ownerName:"Bruce",status:true },
-        { id: "10", name: "10", imageUrl: imageUrl,ownerName:"Bruce",status:true}
-        ]}>
-            
-
-            <Button>artnsaeti</Button>
-        </LendingItemsDialog>
         <BorrowPost>
-            <Button>artnsaeti</Button>
+            <Button>Create</Button>
         </BorrowPost>
+        <LendingItemsDialog lendingItems={[{ id: "1", name: "1", imageUrl: imageUrl, ownerName: "Bruce", status: true },
+        { id: "2", name: "2", imageUrl: imageUrl, ownerName: "Bruce", status: true },
+        { id: "3", name: "3", imageUrl: imageUrl, ownerName: "Bruce", status: true },
+        { id: "4", name: "4", imageUrl: imageUrl, ownerName: "Bruce", status: true },
+        { id: "5", name: "5", imageUrl: imageUrl, ownerName: "Bruce", status: true },
+        { id: "6", name: "6", imageUrl: imageUrl, ownerName: "Bruce", status: true },
+        { id: "7", name: "7", imageUrl: imageUrl, ownerName: "Bruce", status: true },
+        { id: "8", name: "8", imageUrl: imageUrl, ownerName: "Bruce", status: true },
+        { id: "9", name: "9", imageUrl: imageUrl, ownerName: "Bruce", status: true },
+        { id: "10", name: "10", imageUrl: imageUrl, ownerName: "Bruce", status: true }
+        ]}
+            borrowPostCard={{ id: "1", name: "Bruce", surName: "nun", description: "จะขอยืม กระทะมาทำหมูกระทะหน่อยคับ มีมั้ยคับ รีบมากเลยคับ", createdAt: new Date(2014, 6, 2, 6, 50) }}>
+
+
+        </LendingItemsDialog>
     </div>
 }

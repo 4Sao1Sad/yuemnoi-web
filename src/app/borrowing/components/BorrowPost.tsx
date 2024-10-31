@@ -43,7 +43,7 @@ export default function BorrowPost({ children: ButtonTrigger }: LendingItemsDial
                             name="description"
                             render={({ field }) => (
                                 <FormItem className="flex flex-1 flex-col max-h-[512px] overflow-y-scroll">
-                                    <Textarea {...field} placeholder="Write what you're looking for!" />
+                                    <Textarea {...field} placeholder="Write what you're looking for!" className="resize-none" />
                                     <FormMessage />
                                 </FormItem>
                             )}
