@@ -24,6 +24,7 @@ const config: Config = {
         input: {
           outline: "var(--input-outline)",
         },
+        gray:"var(--gray)",
       },
       borderRadius: {
         lg: "var(--radius)",

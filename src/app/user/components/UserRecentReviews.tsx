@@ -9,15 +9,15 @@ export default function UserRecentReview({ data }: { data: UserRecentReviewProp[
         {data.map(({ id, name, surname, score, description }, index) => {
             return <div key={id} className="h-fit flex-1 flex-col justify-center items-start  px-4 py-3 space-y-2 shadow-lg rounded-lg">
                 <div className="flex flex-row justify-between w-full items-center">
-                    <h2 className="text-sm font-medium line-clamp-1 break-all text-gray-500">{`${name}   ${surname}`}</h2>
+                    <h2 className="text-sm font-medium line-clamp-1 break-all text-gray">{`${name}   ${surname}`}</h2>
                     <div className="flex flex-row justify-between space-x-1  items-center">
                         <span className="text-lg font-semibold">
-                            <FontAwesomeIcon icon={faStar} className="text-red-500" />
+                            <FontAwesomeIcon icon={faStar} className="text-primary" />
                         </span>
                         <span className="text-lg font-semibold">{score}</span>
                     </div>
                 </div>
-                <div>
+                <div className="text-lg font-medium">
                     {description}
                 </div>
             </div>

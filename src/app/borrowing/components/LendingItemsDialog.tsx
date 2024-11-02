@@ -12,6 +12,7 @@ import {
 } from "@yuemnoi/components/ui/dialog"
 import { FormField, FormItem, FormLabel, FormControl, FormMessage, Form } from "@yuemnoi/components/ui/form";
 import { cn } from "@yuemnoi/lib/utils/utils";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -40,27 +41,28 @@ export default function LendingItemsDialog({ lendingItems: LendingItems, borrowP
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
     })
+    const [dialogOpen, setDialogOpen] = useState(false)
     function onSubmit(data: z.infer<typeof FormSchema>) {
         console.log(data)
     }
     return (
-        <Dialog >
+        <Dialog open={dialogOpen}>
             <DialogTrigger asChild>
-                <Button key={borrowPostCard.id} className="h-fit flex flex-col items-start  px-4 py-3 space-y-2 shadow-lg rounded-lg bg-white text-black hover:bg-gray-50">
+                <Button onClick={() => setDialogOpen(true)} key={borrowPostCard.id} className="h-fit flex flex-col items-start  px-4 py-3 shadow-lg rounded-lg bg-white text-black hover:bg-gray-50">
                     <div className="flex flex-row justify-between w-full items-center">
-                        <h2 className="text-md font-medium line-clamp-1 break-all ">{`${borrowPostCard.name} ${borrowPostCard.surName}`}</h2>
+                        <h2 className="text-lg font-medium line-clamp-1 break-all ">{`${borrowPostCard.name} ${borrowPostCard.surName}`}</h2>
                         <div className="flex flex-row justify-between space-x-1  items-center">
-                            <span className="text-md font-normal text-gray-500">{formatTimeAgo(borrowPostCard.createdAt)}</span>
+                            <span className="text-md font-normal text-gray">{formatTimeAgo(borrowPostCard.createdAt)}</span>
                         </div>
                     </div>
-                    <div className="text-xl">
+                    <div className="text-xl font-normal">
                         {borrowPostCard.description}
                     </div>
                 </Button>
             </DialogTrigger>
             <DialogContent className="rounded-lg" >
                 <DialogHeader>
-                    <DialogTitle>Select Your Lending Items</DialogTitle>
+                    <DialogTitle className="text-h3 my-4">Select Your Lending Items</DialogTitle>
                     <DialogDescription className="hidden">Edit your profile information</DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
@@ -80,14 +82,14 @@ export default function LendingItemsDialog({ lendingItems: LendingItems, borrowP
                                                 LendingItems.map((item) => (
                                                     <FormItem className="flex items-center justify-center  " key={item.id}>
                                                         <FormControl >
-                                                            <RadioGroupItem value={item.id} className="bg-white flex flex-1 h-fit flex-row justify-start aria-checked:bg-orange-400 space-x-3 px-4 py-2 rounded-md shadow-md hover:bg-orange-300" >
+                                                            <RadioGroupItem value={item.id} className="bg-white flex flex-1 h-fit flex-row justify-start aria-checked:bg-secondary-hover  aria-checked:border-primary  aria-checked:border-4 space-x-5 px-4 py-4 rounded-xl shadow-md " >
                                                                 <img src={item.imageUrl} alt={item.name} className="h-20 w-20" />
-                                                                <div className="flex justify-center items-start flex-1 flex-col">
+                                                                <div className="flex justify-center items-start flex-1 flex-col space-y-2">
                                                                     <h2 className="text-xl font-semibold line-clamp-1 break-all text-black">{`${item.name} `}</h2>
-                                                                    <div className="flex flex-row text-xs space-x-2">
-                                                                        <h2 className=" font-medium line-clamp-1 break-all text-gray-500">{`by ${item.ownerName}`}</h2>
+                                                                    <div className="flex flex-row text-sm space-x-2">
+                                                                        <h2 className=" font-medium line-clamp-1 break-all text-gray">{`by ${item.ownerName}`}</h2>
                                                                         <h2 className={cn("  line-clamp-1 break-all font-bold ",
-                                                                            item.status ? "text-green-500" : "text-red-500"
+                                                                            item.status ? "text-primary" : "text-red-500"
                                                                         )}>{item.status ? "Avaliable for borrowing" : "Unavaliable"}</h2>
                                                                     </div>
 
@@ -104,7 +106,10 @@ export default function LendingItemsDialog({ lendingItems: LendingItems, borrowP
                                 </FormItem>
                             )}
                         />
-                        <Button type="submit">Confirm</Button>
+                        <div className="flex  h-fit flex-row w-full space-x-4">
+                            <Button type="submit" size={"lg"} className="rounded-xl py-6  text-xl" variant={"outline"} onClick={() => setDialogOpen(false)}>close</Button>
+                            <Button type="submit" size={"lg"} className="rounded-xl py-6 text-white text-xl flex-1 flex ">Confirm</Button>
+                        </div>
                     </form>
                 </Form>
             </DialogContent>

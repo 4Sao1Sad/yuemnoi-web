@@ -23,6 +23,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Input } from "@yuemnoi/components/ui/input"
+import { useState } from "react"
 
 
 const formSchema = z.object({
@@ -47,25 +48,26 @@ export default function EditProfileDialog(input: typeof formSchema._input) {
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values)
     }
-    return <Dialog >
+    const [dialogOpen, setDialogOpen] = useState(false)
+    return <Dialog open={dialogOpen}>
         <DialogTrigger >
-            <FontAwesomeIcon icon={faEdit} />
+            <FontAwesomeIcon onClick={() => setDialogOpen(true)} icon={faEdit} className="text-primary" />
         </DialogTrigger>
-        <DialogContent className="rounded-lg" >
+        <DialogContent className="rounded-lg space-y-4" >
             <DialogHeader>
-                <DialogTitle>Edit Profile</DialogTitle>
-                <DialogDescription>Edit your profile information</DialogDescription>
+                <DialogTitle className="text-2xl">Edit Profile</DialogTitle>
+                <DialogDescription className="hidden">Edit your profile information</DialogDescription>
             </DialogHeader>
-            <Form {...form}>
+            <Form {...form} >
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                     <FormField
                         control={form.control}
                         name="name"
                         render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Name</FormLabel>
+                            <FormItem >
+                                <FormLabel className="text-lg">Name</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="name" {...field} />
+                                    <Input placeholder="name" className="text-md py-5" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -76,16 +78,18 @@ export default function EditProfileDialog(input: typeof formSchema._input) {
                         name="surname"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Surname</FormLabel>
+                                <FormLabel
+                                    className="text-lg">Surname</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="surname" {...field} />
+                                    <Input placeholder="surname" className="text-lg py-5" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
-                    <div className="flex justify-end">
-                        <Button type="submit" className="self-left w-full sm:w-fit">Confirm</Button>
+                    <div className="flex  h-fit flex-row w-full space-x-4 my-6">
+                        <Button type="submit" size={"lg"} className="rounded-xl py-6  text-xl" variant={"outline"} onClick={() => setDialogOpen(false)}>close</Button>
+                        <Button type="submit" size={"lg"} className="rounded-xl py-6 text-white text-xl flex-1 flex ">Confirm</Button>
                     </div>
                 </form>
 
