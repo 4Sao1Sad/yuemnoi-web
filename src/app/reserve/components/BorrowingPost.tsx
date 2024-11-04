@@ -34,6 +34,27 @@ export default function BorrowingPost({ data }: { data: BorrowingPostProp[] }) {
       imageUrl: "/next.svg",
       borrowStatus: borrowStatusEnum.unavailable,
     },
+    {
+      id: "3",
+      itemName: "เครื่องคิดเลข",
+      lenderUserName: " น้องขิม",
+      imageUrl: "/next.svg",
+      borrowStatus: borrowStatusEnum.unavailable,
+    },
+    {
+      id: "4",
+      itemName: "เครื่องคิดเลข",
+      lenderUserName: " น้องขิม",
+      imageUrl: "/next.svg",
+      borrowStatus: borrowStatusEnum.unavailable,
+    },
+    {
+      id: "5",
+      itemName: "เครื่องคิดเลข",
+      lenderUserName: " น้องขิม",
+      imageUrl: "/next.svg",
+      borrowStatus: borrowStatusEnum.unavailable,
+    },
   ];
 
   return (
@@ -56,9 +77,12 @@ export default function BorrowingPost({ data }: { data: BorrowingPostProp[] }) {
               <DialogHeader className="w-full text-start">
                 <DialogTitle>Select Post to Borrow</DialogTitle>
               </DialogHeader>
-              <BorrowingPostRequest
-                data={borrowingPostRequestData}
-              ></BorrowingPostRequest>
+              <div className="h-[250px] overflow-scroll p-2">
+                <BorrowingPostRequest
+                  data={borrowingPostRequestData}
+                ></BorrowingPostRequest>
+              </div>
+
               <DialogClose>
                 <div className="w-full flex justify-end">
                   <Button className="w-fit">Confirm</Button>
