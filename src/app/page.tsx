@@ -6,6 +6,7 @@ export default function Home() {
   return (
     <div>
       ลองลอง
+      <h1 className="h3 text-primary font-bold">hello</h1>
       <Button>button</Button>
       <Button variant="outline">outline</Button>
       <Tabs defaultValue="account">
@@ -14,7 +15,7 @@ export default function Home() {
           <TabsTrigger value="password">เครื่องคิดเลข</TabsTrigger>
         </TabsList>
       </Tabs>
-      <Input placeholder="test"></Input>
+      <Input placeholder="test" />
     </div>
   );
 }
