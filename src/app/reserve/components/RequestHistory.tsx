@@ -2,11 +2,10 @@
 import { Button } from "@yuemnoi/components/ui/button";
 import Image from "next/image";
 import { activeStatusEnum } from "./ActiveStatusEnum";
-// import { faStar } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import Rating from "@mui/material/Rating";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -91,16 +90,18 @@ export default function RequestHistory({
                     <DialogHeader className="w-full text-start">
                       <DialogTitle>{`Review to ${lenderUserName}`}</DialogTitle>
                     </DialogHeader>
-                    {/* <span className="text-lg font-semibold">
-                      <FontAwesomeIcon icon={faStar} className="text-red-500" />
-                    </span> */}
+                    <Rating></Rating>
                     <Input
                       className="h-[100px] overflow-scroll"
                       placeholder="Write your review here !"
                     ></Input>
                     <div className="w-full flex gap-2 justify-end">
-                      <Button variant="outline">Cancel</Button>
-                      <Button>Create</Button>
+                      <DialogClose>
+                        <Button variant="outline">Cancel</Button>
+                      </DialogClose>
+                      <DialogClose>
+                        <Button>Create</Button>
+                      </DialogClose>
                     </div>
                   </DialogContent>
                 </Dialog>
