@@ -23,26 +23,26 @@ export default function LendingCard({
         style={{ width: "100%", height: "auto" }}
       />
       <div className="gap-3 px-6 py-4 flex flex-col">
-        <div className="gap-1 flex flex-row justify-between">
+        <div className="gap-1 pb-1 flex flex-row justify-between border-b border-gray">
           <div className="flex flex-col">
             <h3 className="font-semibold">{post.itemName}</h3>
-            <p className="text-tiny text-gray-500">by {post.ownerName}</p>
+            <p className="text-tiny text-gray">by {post.ownerName}</p>
           </div>
-          <div className="flex flex-row">
+          <div className="flex flex-row gap-1">
             <h3 className="font-bold">{post.price} Bath</h3>
-            <p className="text-body2 text-gray-500 font-bold pt-0.5">/day</p>
+            <p className="text-body2 text-gray font-bold pt-0.5">/day</p>
           </div>
         </div>
         <p>{post.description}</p>
+        <Button
+          onClick={() => onReserveClick(post)}
+          variant="default"
+          size="default"
+          className="w-full"
+        >
+          Reserve
+        </Button>
       </div>
-      <Button
-        onClick={() => onReserveClick(post)}
-        variant="default"
-        size="default"
-        className="w-full"
-      >
-        Reserve
-      </Button>
     </div>
   );
 }

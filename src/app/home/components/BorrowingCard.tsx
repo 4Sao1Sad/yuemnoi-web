@@ -56,8 +56,8 @@ export default function BorrowingCard({ post }: { post: BorrowingPost }) {
     <Dialog>
       <DialogTrigger className="w-full ">
         <div className="h-fit flex flex-col items-start px-4 py-3 space-y-2 shadow-lg rounded-lg mb-4">
-          <p className="font-semibold">{post.ownerName}</p>
-          <h3 className="items-start">{post.description}</h3>
+          <p className="font-semibold text-start">{post.ownerName}</p>
+          <h3 className="items-start text-start">{post.description}</h3>
         </div>
       </DialogTrigger>
       <DialogContent>

@@ -83,67 +83,87 @@ export default function HomePage() {
         <DialogPortal>
           <DialogOverlay />
           <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Create Lending Post</DialogTitle>
-              <DialogDescription>
-                This post will allow others to request and borrow your item.
-              </DialogDescription>
+            <DialogHeader className="text-start">
+              {activeTab === "lending" ? (
+                <>
+                  <DialogTitle>Create Lending Post</DialogTitle>
+                  <DialogDescription>
+                    This post will allow others to request and borrow your item.
+                  </DialogDescription>
+                </>
+              ) : (
+                <>
+                  <DialogTitle>Create Borrowing Post</DialogTitle>
+                </>
+              )}
             </DialogHeader>
             <form className="space-y-4">
-              <div>
-                <label className="block mb-1" htmlFor="itemName">
-                  Name
-                </label>
-                <Input
-                  type="text"
-                  placeholder="Name"
-                  id="itemName"
-                  required
-                  className="mb-4"
-                />
-              </div>
-              <div>
-                <label className="block mb-1" htmlFor="description">
-                  Description
-                </label>
-                <Textarea
-                  placeholder="Description"
-                  id="description"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block mb-1" htmlFor="imageUrl">
-                  Image URL
-                </label>
-                <Input
-                  type="url"
-                  placeholder="Image URL"
-                  id="imageUrl"
-                  required
-                  className="mb-4"
-                />
-              </div>
-              <div>
-                <label className="block mb-1" htmlFor="price">
-                  Price
-                </label>
-                <Input
-                  type="number"
-                  placeholder="Price"
-                  id="price"
-                  step="0.5"
-                  required
-                  className="mb-4"
-                />
-              </div>
+              {activeTab === "lending" ? (
+                <>
+                  <div>
+                    <label className="block mb-1" htmlFor="itemName">
+                      Name
+                    </label>
+                    <Input
+                      type="text"
+                      placeholder="Name"
+                      id="itemName"
+                      required
+                      className="mb-4"
+                    />
+                  </div>
+                  <div>
+                    <label className="block mb-1" htmlFor="description">
+                      Description
+                    </label>
+                    <Textarea
+                      placeholder="Description"
+                      id="description"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block mb-1" htmlFor="imageUrl">
+                      Image URL
+                    </label>
+                    <Input
+                      type="url"
+                      placeholder="Image URL"
+                      id="imageUrl"
+                      required
+                      className="mb-4"
+                    />
+                  </div>
+                  <div>
+                    <label className="block mb-1" htmlFor="price">
+                      Price
+                    </label>
+                    <Input
+                      type="number"
+                      placeholder="Price"
+                      id="price"
+                      step="0.5"
+                      required
+                      className="mb-4"
+                    />
+                  </div>
+                </>
+              ) : (
+                <div>
+                  <Textarea
+                    placeholder="Write what you're looking for!"
+                    id="description"
+                    required
+                  />
+                </div>
+              )}
             </form>
-            <DialogFooter>
+            <DialogFooter className="flex flex-row gap-4">
               <Button
                 onClick={handleCloseDialog}
                 variant="outline"
                 size="default"
-                className="mt-2"
+                className="mt-2 w-full"
               >
                 Close
               </Button>
@@ -151,7 +171,7 @@ export default function HomePage() {
                 onClick={handleCloseDialog}
                 variant="default"
                 size="default"
-                className="mt-2"
+                className="mt-2 w-full"
               >
                 Create
               </Button>
