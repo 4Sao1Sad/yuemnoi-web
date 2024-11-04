@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@yuemnoi/components/ui/dialog"
-import { FormField, FormItem, FormLabel, FormControl, FormMessage, Form } from "@yuemnoi/components/ui/form";
+import { FormField, FormItem, FormControl, FormMessage, Form } from "@yuemnoi/components/ui/form";
 import { cn } from "@yuemnoi/lib/utils/utils";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -50,28 +50,28 @@ export default function LendingItemsDialog({ lendingItems: LendingItems, borrowP
       <DialogTrigger asChild>
         <Button onClick={() => setDialogOpen(true)} key={borrowPostCard.id} className="h-fit flex flex-col items-start  px-4 py-3 shadow-lg rounded-lg bg-white text-black hover:bg-gray-50">
           <div className="flex flex-row justify-between w-full items-center">
-            <h2 className="text-lg font-medium line-clamp-1 break-all ">{`${borrowPostCard.name} ${borrowPostCard.surName}`}</h2>
+            <h2 className="h6  font-medium line-clamp-1 break-all ">{`${borrowPostCard.name} ${borrowPostCard.surName}`}</h2>
             <div className="flex flex-row justify-between space-x-1  items-center">
-              <span className="text-md font-normal text-gray">{formatTimeAgo(borrowPostCard.createdAt)}</span>
+              <span className="h6 font-normal text-gray">{formatTimeAgo(borrowPostCard.createdAt)}</span>
             </div>
           </div>
-          <div className="text-xl font-normal">
+          <div className="h5 font-normal">
             {borrowPostCard.description}
           </div>
         </Button>
       </DialogTrigger>
-      <DialogContent className="rounded-lg" >
+      <DialogContent className="rounded-lg max-w-[420px] " >
         <DialogHeader>
-          <DialogTitle className="text-2xl my-4 ">Select Your Lending Items</DialogTitle>
+          <DialogTitle className="text-xl my-4 ">Select Your Lending Items</DialogTitle>
           <DialogDescription className="hidden">Edit your profile information</DialogDescription>
         </DialogHeader>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-1 flex-col space-y-4 ">
+        <Form {...form} >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-1 flex-col  ">
             <FormField
               control={form.control}
               name="itemId"
               render={({ field }) => (
-                <FormItem className="flex flex-1 flex-col max-h-[512px] overflow-y-scroll">
+                <FormItem className="flex flex-1 flex-col max-h-[512px] overflow-y-scroll px-1">
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -80,14 +80,14 @@ export default function LendingItemsDialog({ lendingItems: LendingItems, borrowP
                     >
                       {
                         LendingItems.map((item) => (
-                          <FormItem className="flex items-center justify-center  " key={item.id}>
+                          <FormItem className="flex items-center justify-center " key={item.id}>
                             <FormControl >
-                              <RadioGroupItem value={item.id} className="bg-white flex flex-1 h-fit flex-row justify-start aria-checked:bg-secondary-hover  aria-checked:border-primary  aria-checked:border-4 space-x-5 px-4 py-4 rounded-xl shadow-md " >
-                                <img src={item.imageUrl} alt={item.name} className="h-20 w-20" />
+                              <RadioGroupItem value={item.id} className="bg-white flex flex-1 h-fit flex-row justify-start aria-checked:bg-secondary-hover  aria-checked:border-primary  aria-checked:border-2 space-x-5 px-4 py-4 rounded-xl shadow-md " >
+                                <img src={item.imageUrl} alt={item.name} className="h-16 w-16" />
                                 <div className="flex justify-center items-start flex-1 flex-col space-y-2">
-                                  <h2 className="text-xl font-semibold line-clamp-1 break-all text-black">{`${item.name} `}</h2>
+                                  <h2 className="line-clamp-1 font-semibold break-all h5 ">{`${item.name}`}</h2>
                                   <div className="flex flex-row text-sm space-x-2">
-                                    <h2 className=" font-medium line-clamp-1 break-all text-gray">{`by ${item.ownerName}`}</h2>
+                                    <h2 className=" font-medium h6 line-clamp-1 break-all text-gray">{`by ${item.ownerName}`}</h2>
                                     <h2 className={cn("  line-clamp-1 break-all font-bold ",
                                       item.status ? "text-primary" : "text-red-500"
                                     )}>{item.status ? "Avaliable for borrowing" : "Unavaliable"}</h2>
@@ -106,9 +106,9 @@ export default function LendingItemsDialog({ lendingItems: LendingItems, borrowP
                 </FormItem>
               )}
             />
-            <div className="flex  h-fit flex-row w-full space-x-4">
-              <Button type="submit" size={"lg"} className="rounded-xl py-6  text-xl" variant={"outline"} onClick={() => setDialogOpen(false)}>close</Button>
-              <Button type="submit" size={"lg"} className="rounded-xl py-6 text-white text-xl flex-1 flex ">Confirm</Button>
+            <div className="flex  h-fit flex-row w-full space-x-4 mt-10">
+              <Button type="submit" size={"lg"} className="rounded-xl   text-sm" variant={"outline"} onClick={() => setDialogOpen(false)}>Close</Button>
+              <Button type="submit" size={"lg"} className="rounded-xl  text-white text-sm flex-1 flex ">Confirm</Button>
             </div>
           </form>
         </Form>

@@ -22,16 +22,16 @@ export default function UserPage() {
 
   return <div className=" min-h-screen max-w-screen w-screen flex flex-col">
     <div className="w-full px-4">
-      <h3 className="text-2xl font-bold my-3">User Profile</h3>
+      <h3 className="text-xl font-bold my-3">User Profile</h3>
       <div className="h-fit flex-1 flex-col justify-center items-start my-3 px-6 py-3 space-y-2 shadow-lg rounded-lg">
         <div className="flex flex-row justify-between w-full">
-          <h2 className="text-xl font-semibold line-clamp-1 break-all">{`${name}   ${surname}`}</h2>
+          <h2 className="text-lg font-semibold line-clamp-1 break-all ">{`${name}   ${surname}`}</h2>
           <EditProfileDialog name="bruce" surname="nun" />
         </div>
-        <h4 className="line-clamp-1 break-all">{`Contact:  ${email}`}</h4>
+        <h4 className="line-clamp-1 break-all h6">{`Contact:  ${email}`}</h4>
       </div>
       <hr className="w-full text-input-outline" />
-      <h3 className="text-2xl font-bold my-4">Recent Review</h3>
+      <h3 className="text-xl font-bold my-4">Recent Review</h3>
       <UserRecentReview data={data} />
     </div>
 

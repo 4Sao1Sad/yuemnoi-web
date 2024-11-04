@@ -10,7 +10,6 @@ import {
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -53,21 +52,21 @@ export default function EditProfileDialog(input: typeof formSchema._input) {
         <DialogTrigger >
             <FontAwesomeIcon onClick={() => setDialogOpen(true)} icon={faEdit} className="text-primary" />
         </DialogTrigger>
-        <DialogContent className="rounded-lg space-y-4" >
+        <DialogContent className="rounded-lg mb-2" >
             <DialogHeader>
-                <DialogTitle className="text-2xl">Edit Profile</DialogTitle>
+                <DialogTitle className="text-xl">Edit Profile</DialogTitle>
                 <DialogDescription className="hidden">Edit your profile information</DialogDescription>
             </DialogHeader>
             <Form {...form} >
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
                     <FormField
                         control={form.control}
                         name="name"
                         render={({ field }) => (
                             <FormItem >
-                                <FormLabel className="text-lg">Name</FormLabel>
+                                <FormLabel className="text-md">Name</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="name" className="text-md py-5" {...field} />
+                                    <Input placeholder="name" className="text-sm py-5" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -79,17 +78,17 @@ export default function EditProfileDialog(input: typeof formSchema._input) {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel
-                                    className="text-lg">Surname</FormLabel>
+                                    className="text-md">Surname</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="surname" className="text-lg py-5" {...field} />
+                                    <Input placeholder="surname" className="text-sm py-5" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
-                    <div className="flex  h-fit flex-row w-full space-x-4 my-6">
-                        <Button type="submit" size={"lg"} className="rounded-xl py-6  text-xl" variant={"outline"} onClick={() => setDialogOpen(false)}>close</Button>
-                        <Button type="submit" size={"lg"} className="rounded-xl py-6 text-white text-xl flex-1 flex ">Confirm</Button>
+                    <div className="flex  h-fit flex-row w-full space-x-4 mt-2">
+                        <Button type="submit" size={"lg"} className="rounded-xl   text-sm" variant={"outline"} onClick={() => setDialogOpen(false)}>Close</Button>
+                        <Button type="submit" size={"lg"} className="rounded-xl  text-white text-sm flex-1 flex ">Confirm</Button>
                     </div>
                 </form>
 

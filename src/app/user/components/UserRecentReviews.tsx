@@ -11,13 +11,13 @@ export default function UserRecentReview({ data }: { data: UserRecentReviewProp[
                 <div className="flex flex-row justify-between w-full items-center">
                     <h2 className="text-sm font-medium line-clamp-1 break-all text-gray">{`${name}   ${surname}`}</h2>
                     <div className="flex flex-row justify-between space-x-1  items-center">
-                        <span className="text-lg font-semibold">
+                        <span className="text-md font-semibold">
                             <FontAwesomeIcon icon={faStar} className="text-primary" />
                         </span>
-                        <span className="text-lg font-semibold">{score}</span>
+                        <span className="text-md font-semibold">{score}</span>
                     </div>
                 </div>
-                <div className="text-lg font-medium">
+                <div className="text-md font-medium">
                     {description}
                 </div>
             </div>
