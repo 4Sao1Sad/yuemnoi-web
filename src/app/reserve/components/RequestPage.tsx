@@ -5,6 +5,8 @@ import BorrowingPost from "./BorrowingPost";
 import LendingPost from "./LendingPost";
 import { activeStatusEnum } from "./ActiveStatusEnum";
 import { useState } from "react";
+import { faRepeat } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function RequestPage() {
   const [requestState, setRequestState] = useState(true);
@@ -68,6 +70,9 @@ export default function RequestPage() {
   return (
     <div className="w-full min-h-screen">
       <Button className="w-full" onClick={() => setRequestState(!requestState)}>
+        <span className="text-lg font-semibold">
+          <FontAwesomeIcon icon={faRepeat} className="text-white" />
+        </span>
         {requestState ? "My Requests" : "My Post Requests"}
       </Button>
       {requestState ? (

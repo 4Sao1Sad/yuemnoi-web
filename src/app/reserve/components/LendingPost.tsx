@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from "@yuemnoi/components/ui/button";
 import Image from "next/image";
+import { useState } from "react";
 
 interface LendingPostProp {
   id: string;

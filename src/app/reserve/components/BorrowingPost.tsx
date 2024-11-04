@@ -2,13 +2,12 @@
 import { Button } from "@yuemnoi/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@yuemnoi/components/ui/dialog";
-import { Input } from "@yuemnoi/components/ui/input";
-import Image from "next/image";
 import { borrowStatusEnum } from "./BorrowStatusEnum";
 import BorrowingPostRequest from "./BorrowingPostRequest";
 
@@ -60,6 +59,11 @@ export default function BorrowingPost({ data }: { data: BorrowingPostProp[] }) {
               <BorrowingPostRequest
                 data={borrowingPostRequestData}
               ></BorrowingPostRequest>
+              <DialogClose>
+                <div className="w-full flex justify-end">
+                  <Button className="w-fit">Confirm</Button>
+                </div>
+              </DialogClose>
             </DialogContent>
           </Dialog>
         );

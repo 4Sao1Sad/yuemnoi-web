@@ -54,9 +54,6 @@ export default function BorrowingPostRequest({
           );
         }
       )}
-      <div className="w-full flex justify-end">
-        <Button className="w-fit">Confirm</Button>
-      </div>
     </div>
   );
 }
