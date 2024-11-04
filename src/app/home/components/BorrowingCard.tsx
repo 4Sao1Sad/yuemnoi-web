@@ -68,7 +68,7 @@ export default function BorrowingCard({ post }: { post: BorrowingPost }) {
           <LendingOffer data={lendingPostRequestData}></LendingOffer>
         </div>
 
-        <DialogFooter>
+        <DialogFooter className="flex flex-row gap-4">
           <Button
             // onClick={}
             variant="outline"
