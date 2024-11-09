@@ -2,6 +2,8 @@
 import { Button } from "@yuemnoi/components/ui/button";
 import { requestTypeEnum } from "../enum/RequestType";
 import Image from "next/image";
+import ReturnItemBorrowingRequest from "../actions/returnItemBorrowingRequest";
+import ReturnItemLendingRequest from "../actions/returnItemLendingRequest";
 
 interface ActiveRequestProp {
   id: string;
@@ -50,7 +52,15 @@ export function ActiveRequest({ data }: { data: ActiveRequestProp[] }) {
                 </div>
               </div>
               {type == requestTypeEnum.lending ? (
-                <Button className="w-full">Mark Return</Button>
+                <Button
+                  className="w-full"
+                  onClick={() => {
+                    ReturnItemBorrowingRequest(Number(id));
+                    ReturnItemLendingRequest(Number(id));
+                  }}
+                >
+                  Mark Return
+                </Button>
               ) : null}
             </div>
           );

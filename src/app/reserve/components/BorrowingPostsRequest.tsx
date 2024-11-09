@@ -10,7 +10,7 @@ export default async function BorrowingPostsRequest({
 }: {
   postId: number;
 }) {
-  const borrowingPostRequestData = await GetBorrowingPostsById(postId);
+  const borrowingPostRequestData = await GetBorrowingPostsById();
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
       {borrowingPostRequestData.map((data, index) => {

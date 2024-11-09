@@ -13,7 +13,9 @@ interface RequestHistoryProp {
 export default async function GetMyLendingPosts(): Promise<
   RequestHistoryProp[]
 > {
-  const response = await fetch(`http://localhost:8082/get-my-history-request`);
+  const response = await fetch(
+    `https://cd3b-184-22-33-12.ngrok-free.app/reserves/history-requests`
+  );
   if (!response.ok) {
     throw new Error("Failed to get history request");
   }

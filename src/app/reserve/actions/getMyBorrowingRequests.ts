@@ -1,7 +1,7 @@
 //GetMyBorrowingRequests
 export default async function getMyBorrowingRequests() {
   const response = await fetch(
-    `http://localhost:8082/borrowing-requests/get-my-borrowing-request`
+    `https://cd3b-184-22-33-12.ngrok-free.app/reserves/borrowing-requests/my-requests`
   );
   if (!response.ok) {
     throw new Error("Failed to get borrowing request");

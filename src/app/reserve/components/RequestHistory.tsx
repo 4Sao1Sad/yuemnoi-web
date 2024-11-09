@@ -12,6 +12,7 @@ import {
   DialogTrigger,
 } from "@yuemnoi/components/ui/dialog";
 import { Input } from "@yuemnoi/components/ui/input";
+import CreateReview from "../actions/createReview";
 
 interface RequestHistoryProp {
   id: string;
@@ -100,7 +101,7 @@ export default function RequestHistory({
                         <Button variant="outline">Cancel</Button>
                       </DialogClose>
                       <DialogClose>
-                        <Button>Create</Button>
+                        <Button onClick={() => CreateReview()}>Create</Button>
                       </DialogClose>
                     </div>
                   </DialogContent>
