@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Image from "next/image";
-import { activeStatusEnum } from "./ActiveStatusEnum";
+import { activeStatusEnum } from "../enum/ActiveStatusEnum";
 
 interface BorrowingRequestProp {
   id: string;
@@ -21,14 +21,15 @@ interface BorrowingRequestProp {
 //     ActiveStatus:    res.ActiveStatus,
 // }
 
-export default function BorrowingRequest({
+export default async function BorrowingRequest({
   data,
 }: {
-  data: BorrowingRequestProp[];
+  data: Promise<BorrowingRequestProp[]>;
 }) {
+  const borrowingRequestsData = await data;
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
-      {data.map(
+      {borrowingRequestsData.map(
         ({ id, itemName, name, surname, imageUrl, activeStatus }, index) => {
           return (
             <div

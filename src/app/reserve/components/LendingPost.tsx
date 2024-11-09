@@ -12,10 +12,15 @@ interface LendingPostProp {
   imageUrl: string;
 }
 
-export default function LendingRequest({ data }: { data: LendingPostProp[] }) {
+export default async function LendingRequest({
+  data,
+}: {
+  data: Promise<LendingPostProp[]>;
+}) {
+  const lendingPostData = await data;
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
-      {data.map(
+      {lendingPostData.map(
         (
           { id, itemName, name, surname, borrowerUserName, imageUrl },
           index

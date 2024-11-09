@@ -21,14 +21,15 @@ interface LendingRequestProp {
 //     ActiveStatus:    request.ActiveStatus,
 // }
 
-export default function LendingRequest({
+export default async function LendingRequest({
   data,
 }: {
-  data: LendingRequestProp[];
+  data: Promise<LendingRequestProp[]>;
 }) {
+  const lendingRequestsData = await data;
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
-      {data.map(
+      {lendingRequestsData.map(
         (
           {
             id,

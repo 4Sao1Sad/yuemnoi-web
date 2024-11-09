@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from "@yuemnoi/components/ui/button";
-import { requestTypeEnum } from "./RequestType";
+import { requestTypeEnum } from "../enum/RequestType";
 import Image from "next/image";
 
 interface ActiveRequestProp {
@@ -14,7 +14,7 @@ interface ActiveRequestProp {
 
 // get my active request
 
-export default function ActiveRequest({ data }: { data: ActiveRequestProp[] }) {
+export function ActiveRequest({ data }: { data: ActiveRequestProp[] }) {
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
       {data.map(

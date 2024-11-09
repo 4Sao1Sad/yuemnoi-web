@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from "@yuemnoi/components/ui/button";
 import Image from "next/image";
-import { activeStatusEnum } from "./ActiveStatusEnum";
+import { activeStatusEnum } from "../enum/ActiveStatusEnum";
 import Rating from "@mui/material/Rating";
 import {
   Dialog,
