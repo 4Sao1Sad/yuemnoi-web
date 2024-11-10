@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import Image from "next/image";
 
 interface LendingRequestProp {
@@ -12,37 +11,24 @@ interface LendingRequestProp {
   createdAt: string;
 }
 
-// resp := pb.LendingRequest{
-//     Id:              uint64(request.ID),
-//     LendingUserId:   uint64(request.LendingUserID),
-//     BorrowingUserId: uint64(request.BorrowingUserID),
-//     PostId:          uint64(request.PostID),
-//     Status:          util.MapModelToProtoStatus(request.Status),
-//     ActiveStatus:    request.ActiveStatus,
-// }
-
-export default async function LendingRequest({
+export default function LendingRequest({
   data,
 }: {
-  data: Promise<LendingRequestProp[]>;
+  data: LendingRequestProp[] | undefined;
 }) {
-  const lendingRequestsData = await data;
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
-      {lendingRequestsData.map(
-        (
-          {
-            id,
-            itemName,
-            description,
-            name,
-            surname,
-            borrowerUserName,
-            imageUrl,
-            createdAt,
-          },
-          index
-        ) => {
+      {data?.map(
+        ({
+          id,
+          itemName,
+          description,
+          name,
+          surname,
+          borrowerUserName,
+          imageUrl,
+          createdAt,
+        }) => {
           return (
             <div
               key={id}

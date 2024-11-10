@@ -1,4 +1,4 @@
 export enum requestTypeEnum {
-  lending = "lending",
-  borrowing = "borrowing",
+  lending = "Lending request",
+  borrowing = "Borrowing request",
 }

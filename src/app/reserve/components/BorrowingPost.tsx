@@ -21,10 +21,10 @@ interface BorrowingPostProp {
   createdAt: string;
 }
 
-export default async function BorrowingPost({
+export default function BorrowingPost({
   data,
 }: {
-  data: Promise<BorrowingPostProp[]>;
+  data: BorrowingPostProp[] | undefined;
 }) {
   // const borrowingPostRequestData = [
   //   {
@@ -64,43 +64,39 @@ export default async function BorrowingPost({
   //   },
   // ];
 
-  const borrowingPostsData = await data;
-
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
-      {borrowingPostsData.map(
-        ({ id, description, name, surname, createdAt }, index) => {
-          return (
-            <Dialog key={id}>
-              <DialogTrigger className="w-full ">
-                <div className="h-fit flex-1 flex-col justify-start items-start  px-4 py-3 space-y-2 shadow-lg rounded-lg hover:bg-slate-200">
-                  <div className="flex flex-row justify-between">
-                    <h2 className="text-sm font-bold">{`${name}   ${surname}`}</h2>
-                    <h2 className="text-sm line-clamp-1 break-all text-gray-400 ">{`Created At:   ${createdAt}`}</h2>
-                  </div>
-                  <h1 className=" flex justify-start line-clamp-1 break-all">
-                    {description}
-                  </h1>
+      {data?.map(({ id, description, name, surname, createdAt }, index) => {
+        return (
+          <Dialog key={id}>
+            <DialogTrigger className="w-full ">
+              <div className="h-fit flex-1 flex-col justify-start items-start  px-4 py-3 space-y-2 shadow-lg rounded-lg hover:bg-slate-200">
+                <div className="flex flex-row justify-between">
+                  <h2 className="text-sm font-bold">{`${name}   ${surname}`}</h2>
+                  <h2 className="text-sm line-clamp-1 break-all text-gray-400 ">{`Created At:   ${createdAt}`}</h2>
                 </div>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader className="w-full text-start">
-                  <DialogTitle>Select Post to Borrow</DialogTitle>
-                </DialogHeader>
-                <div className="h-[250px] overflow-scroll p-2">
-                  <BorrowingPostsRequest postId={Number(id)} />
-                </div>
+                <h1 className=" flex justify-start line-clamp-1 break-all">
+                  {description}
+                </h1>
+              </div>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader className="w-full text-start">
+                <DialogTitle>Select Post to Borrow</DialogTitle>
+              </DialogHeader>
+              <div className="h-[250px] overflow-scroll p-2">
+                <BorrowingPostsRequest postId={Number(id)} />
+              </div>
 
-                <DialogClose>
-                  <div className="w-full flex justify-end">
-                    <Button className="w-fit">Confirm</Button>
-                  </div>
-                </DialogClose>
-              </DialogContent>
-            </Dialog>
-          );
-        }
-      )}
+              <DialogClose>
+                <div className="w-full flex justify-end">
+                  <Button className="w-fit">Confirm</Button>
+                </div>
+              </DialogClose>
+            </DialogContent>
+          </Dialog>
+        );
+      })}
     </div>
   );
 }

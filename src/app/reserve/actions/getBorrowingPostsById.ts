@@ -9,11 +9,11 @@ interface BorrowingPostRequestProp {
   borrowStatus: borrowStatusEnum;
 }
 
-export default async function GetBorrowingPostsById(): Promise<
-  BorrowingPostRequestProp[]
-> {
+export default async function GetBorrowingPostsById(
+  postId: number
+): Promise<BorrowingPostRequestProp[]> {
   const response = await fetch(
-    `https://cd3b-184-22-33-12.ngrok-free.app/reserves/borrowing-requests/my-lending-posts`
+    `https://cd3b-184-22-33-12.ngrok-free.app/reserves/borrowing-requests/get-borrowing-posts-by-ids/${postId}`
   );
   if (!response.ok) {
     throw new Error("Failed to get borrowing posts of this request");

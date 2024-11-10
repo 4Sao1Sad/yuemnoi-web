@@ -1,11 +1,38 @@
+"use client";
+import { useEffect, useState } from "react";
 import getMyBorrowingRequests from "../actions/getMyBorrowingRequests";
 import GetMyLendingRequests from "../actions/getMyLendingRequests";
 import BorrowingRequest from "./BorrowingRequest";
 import LendingRequest from "./LendingRequest";
-
-export default async function AllRequestsPage() {
-  const borrowingData = await getMyBorrowingRequests();
-  const lendingData = await GetMyLendingRequests();
+import { activeStatusEnum } from "../enum/ActiveStatusEnum";
+interface BorrowingRequestProp {
+  id: string;
+  itemName: string;
+  name: string;
+  surname: string;
+  imageUrl: string;
+  activeStatus: activeStatusEnum;
+}
+interface LendingRequestProp {
+  id: string;
+  itemName: string;
+  description: string;
+  name: string;
+  surname: string;
+  borrowerUserName: string;
+  imageUrl: string;
+  createdAt: string;
+}
+export default function AllRequestsPage() {
+  const [borrowingData, setBorrowingData] = useState<BorrowingRequestProp[]>();
+  const [lendingData, setLendingData] = useState<LendingRequestProp[]>();
+  useEffect(() => {
+    const fetchData = async () => {
+      setBorrowingData(await getMyBorrowingRequests());
+      setLendingData(await GetMyLendingRequests());
+    };
+    fetchData();
+  }, []);
   return (
     <div className="w-full min-h-screen">
       <h3 className="text-lg font-semibold my-3">Borrowing Request</h3>

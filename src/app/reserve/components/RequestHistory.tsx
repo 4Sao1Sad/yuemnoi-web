@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from "@yuemnoi/components/ui/button";
 import Image from "next/image";
 import { activeStatusEnum } from "../enum/ActiveStatusEnum";
@@ -34,18 +33,15 @@ export default function RequestHistory({
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
       {data.map(
-        (
-          {
-            id,
-            itemName,
-            name,
-            surname,
-            lenderUserName,
-            imageUrl,
-            activeStatus,
-          },
-          index
-        ) => {
+        ({
+          id,
+          itemName,
+          name,
+          surname,
+          lenderUserName,
+          imageUrl,
+          activeStatus,
+        }) => {
           return (
             <div
               key={id}

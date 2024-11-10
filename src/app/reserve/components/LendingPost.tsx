@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from "@yuemnoi/components/ui/button";
 import Image from "next/image";
-import { useState } from "react";
 
 interface LendingPostProp {
   id: string;
@@ -12,19 +10,15 @@ interface LendingPostProp {
   imageUrl: string;
 }
 
-export default async function LendingRequest({
+export default function LendingRequest({
   data,
 }: {
-  data: Promise<LendingPostProp[]>;
+  data: LendingPostProp[] | undefined;
 }) {
-  const lendingPostData = await data;
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
-      {lendingPostData.map(
-        (
-          { id, itemName, name, surname, borrowerUserName, imageUrl },
-          index
-        ) => {
+      {data?.map(
+        ({ id, itemName, name, surname, borrowerUserName, imageUrl }) => {
           return (
             <div
               key={id}
