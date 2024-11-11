@@ -78,4 +78,38 @@ export const lendingPosts: LendingPost[] = [
     ownerID: 3,
     ownerName: "SA SJai",
   },
+  {
+    id: "4",
+    itemName: "Bicycle",
+    description:
+      "It if sometimes furnished unwilling as additions so. Blessing resolved peculiar fat graceful ham. Sussex on at really ladies in as elinor. Sir sex opinions age properly extended. Advice branch vanity or do thirty living. Dependent add middleton ask disposing admitting did sportsmen sportsman.",
+    price: 10.0,
+    activeStatus: true,
+    imageUrl:
+      "https://drive.google.com/uc?export=view&id=1Qk7y478S0r6Vv9SAvxSghi49Xumu6omd",
+    ownerID: 1,
+    ownerName: "Bibbo WithProcreate",
+  },
+  {
+    id: "5",
+    itemName: "Camera",
+    description: "DSLR camera with lenses.",
+    price: 15.0,
+    activeStatus: true,
+    imageUrl:
+      "https://drive.google.com/uc?export=view&id=1Qk7y478S0r6Vv9SAvxSghi49Xumu6omd",
+    ownerID: 2,
+    ownerName: "Noei NoWhereToFound",
+  },
+  {
+    id: "6",
+    itemName: "Tent",
+    description: "4-person tent.",
+    price: 20.0,
+    activeStatus: true,
+    imageUrl:
+      "https://drive.google.com/uc?export=view&id=1Qk7y478S0r6Vv9SAvxSghi49Xumu6omd",
+    ownerID: 3,
+    ownerName: "SA SJai",
+  },
 ];

@@ -6,7 +6,7 @@ interface UserRecentReviewProp { id: string, name: string, surname: string, scor
 
 export default function UserRecentReview({ data }: { data: UserRecentReviewProp[] }) {
     return <div className="h-fit flex flex-1 flex-col space-y-4">
-        {data.map(({ id, name, surname, score, description }, index) => {
+        {data.map(({ id, name, surname, score, description }) => {
             return <div key={id} className="h-fit flex-1 flex-col justify-center items-start  px-4 py-3 space-y-2 shadow-lg rounded-lg">
                 <div className="flex flex-row justify-between w-full items-center">
                     <h2 className="text-sm font-medium line-clamp-1 break-all text-gray">{`${name}   ${surname}`}</h2>

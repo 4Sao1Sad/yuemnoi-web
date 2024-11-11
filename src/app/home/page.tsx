@@ -151,8 +151,9 @@ export default function HomePage() {
               ) : (
                 <div>
                   <Textarea
-                    placeholder="Write what you're looking for!"
+                    placeholder="Write what you're looking for! "
                     id="description"
+                    className="resize-none"
                     required
                   />
                 </div>

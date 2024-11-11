@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 export function NotificationProvider({
 	children,
 }: { children: React.ReactNode }) {
-	const [token, setToken] = React.useState("");
+	const [,setToken] = React.useState("");
 	useEffect(() => {
 		const handleTokenRefresh = async () => {
 			if (typeof Notification === "undefined") {

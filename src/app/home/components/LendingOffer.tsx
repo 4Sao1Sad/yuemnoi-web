@@ -18,7 +18,7 @@ export default function LendingOffer({
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
       {data.map(
-        ({ id, itemName, lenderUserName, imageUrl, lendingStatus }, index) => {
+        ({ id, itemName, lenderUserName, imageUrl, lendingStatus }) => {
           return (
             <div
               key={id}

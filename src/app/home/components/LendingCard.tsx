@@ -13,13 +13,14 @@ export default function LendingCard({
   onReserveClick: (post: LendingPost) => void;
 }) {
   return (
-    <div className="h-fit flex-1 flex-col justify-center items-start py-2 space-y-2 shadow-lg rounded-lg mb-4">
+    <div className="h-fit flex-1 flex-col justify-center max-w-[300px] items-start py-2 space-y-2 shadow-lg rounded-lg mb-4">
       <Image
         src={post.imageUrl}
         alt={post.itemName}
         width={0}
         height={0}
-        sizes="100vw"
+        className="rounded-t-lg"
+
         style={{ width: "100%", height: "auto" }}
       />
       <div className="gap-3 px-6 py-4 flex flex-col">
@@ -33,7 +34,7 @@ export default function LendingCard({
             <p className="text-body2 text-gray font-bold pt-0.5">/day</p>
           </div>
         </div>
-        <p>{post.description}</p>
+        <p className="line-clamp-4 flex h-[90px]">{post.description}</p>
         <Button
           onClick={() => onReserveClick(post)}
           variant="default"

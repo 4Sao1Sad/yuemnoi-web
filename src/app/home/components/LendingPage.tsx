@@ -39,7 +39,8 @@ export default function LendingPage({ searchTerm }: { searchTerm: string }) {
   };
 
   return (
-    <div>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto w-fit gap-4 ">
+
       {filteredPosts.map((post) => (
         <LendingCard
           key={post.id}

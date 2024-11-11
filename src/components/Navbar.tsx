@@ -59,7 +59,7 @@ export default function Navbar() {
       </div>
 
       {isOpen && (
-        <div className="px-4 pt-4 pb-2 space-y-2">
+        <div className="px-4 pt-4 pb-2 space-y-2 z-10 absolute bg-white w-full">
           <Link
             href="/home"
             onClick={toggleMenu}

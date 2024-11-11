@@ -1,5 +1,4 @@
 "use client"
-import { Button } from "@yuemnoi/components/ui/button";
 import EditProfileDialog from "../components/EditProfileDialog";
 import UserRecentReview from "../components/UserRecentReviews";
 export default function UserPage() {
