@@ -1,20 +1,38 @@
-// src/apps/home/components/BorrowingPage.tsx
-
 "use client";
 
-import React from "react";
+import React, { use, useEffect, useState } from "react";
 import BorrowingCard from "./BorrowingCard";
-import { borrowingPosts } from "../mockData";
+import type { BorrowingPost } from "../mockData";
+import { AxiosInstance } from "@yuemnoi/app/client/client";
+import type { LendingPostOfferProp } from "./LendingOffer";
+import { set } from "react-hook-form";
 
 export default function BorrowingPage({ searchTerm }: { searchTerm: string }) {
-  const filteredPosts = borrowingPosts.filter((post) =>
-    post.description.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const [borrowingPosts, setBorrowingPosts] = useState<BorrowingPost[]>([]);
+  const [myLendingPosts, setMyLendingPosts] = useState<LendingPostOfferProp[]>([]);
+  useEffect(() => {
+    AxiosInstance.get(`/posts/borrowing-posts?search=${searchTerm.toLocaleLowerCase()}`).then((res) => {
+      console.log(res.data);
+      setBorrowingPosts(res.data);
+    }).catch((err) => {
+      console.log(err);
+    })
 
+  }, [searchTerm]);
+
+  useEffect(() => {
+    AxiosInstance.get("/posts/lending-posts/me").then((res) => {
+      console.log("this", res.data);
+      setMyLendingPosts(res.data);
+    }
+    ).catch((err) => {
+      console.log(err);
+    });
+  }, []);
   return (
     <div>
-      {filteredPosts.map((post) => (
-        <BorrowingCard key={post.id} post={post} />
+      {borrowingPosts.map((post) => (
+        <BorrowingCard key={post.id} post={post} lendingPostRequestData={myLendingPosts} />
       ))}
     </div>
   );

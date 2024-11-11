@@ -15,7 +15,7 @@ export default function Navbar() {
     <nav className="bg-white shadow-lg">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-4">
-          <button onClick={toggleMenu} className="text-black">
+          <button type="button" onClick={toggleMenu} className="text-black">
             {isOpen ? (
               <FontAwesomeIcon icon={faTimes} size="lg" className="w-8" />
             ) : (

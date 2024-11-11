@@ -1,13 +1,16 @@
 "use client";
 import { getToken, onMessage } from "firebase/messaging";
-import React, { useEffect } from "react";
+import React, { use, useEffect } from "react";
 import { messaging } from "@yuemnoi/lib/firebase/notification";
 import { toast } from 'sonner';
+import { useAuth } from "./AuthProvider";
+import { AxiosInstance } from "@yuemnoi/app/client/client";
 
 export function NotificationProvider({
 	children,
 }: { children: React.ReactNode }) {
-	const [,setToken] = React.useState("");
+	const auth = useAuth();
+	const [token, setToken] = React.useState("");
 	useEffect(() => {
 		const handleTokenRefresh = async () => {
 			if (typeof Notification === "undefined") {
@@ -55,5 +58,15 @@ export function NotificationProvider({
 		};
 		handleTokenRefresh();
 	}, []);
+
+	useEffect(() => {
+		if (auth.id&&token) {
+			AxiosInstance.post('/notifications/user-device', { userId:auth.id,token }).then((res) => {
+				console.log("Token sent to server", res.data);
+			}).catch((err: unknown) => {
+				console.error("Error sending token to server", err);
+			});
+		}
+	},[auth.id,token])
 	return <>{children}</>;
 }

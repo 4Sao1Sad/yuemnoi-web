@@ -38,7 +38,10 @@ export default function RootLayout({
           <NotificationProvider>
             <Navbar />
             <Toaster />
-            {children}
+            <div className="flex max-w-screen min-h-screen lg:px-[120px]">
+              {children}
+
+            </div>
           </NotificationProvider>
         </AuthProvider>
       </body>

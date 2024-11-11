@@ -9,7 +9,7 @@ interface IUser {
     email: string;
 }
 
-const AuthContext = createContext<IUser>({} as IUser);
+export const AuthContext = createContext<IUser>({} as IUser);
 export const useAuth = () => useContext(AuthContext);
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<IUser>({} as IUser);
