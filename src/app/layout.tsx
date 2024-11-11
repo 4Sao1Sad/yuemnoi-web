@@ -6,6 +6,7 @@ import { NotificationProvider } from "@yuemnoi/provider/NotificationProvider";
 import { Toaster } from "sonner";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import AuthProvider from "@yuemnoi/provider/AuthProvider";
 config.autoAddCss = false;
 
 const geistSans = localFont({
@@ -33,11 +34,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NotificationProvider>
-          <Navbar />
-          <Toaster />
-          {children}
-        </NotificationProvider>
+        <AuthProvider>
+          <NotificationProvider>
+            <Navbar />
+            <Toaster />
+            {children}
+          </NotificationProvider>
+        </AuthProvider>
       </body>
     </html>
   );
