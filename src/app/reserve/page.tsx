@@ -1,3 +1,4 @@
+"use client";
 import {
   Tabs,
   TabsContent,
@@ -33,15 +34,15 @@ export default function ReservePage() {
               History
             </TabsTrigger>
           </TabsList>
-          {/* <TabsContent value="request">
+          <TabsContent value="request">
             <RequestPage />
-          </TabsContent> */}
+          </TabsContent>
           <TabsContent value="active">
             <ActivePage />
           </TabsContent>
-          {/* <TabsContent value="history">
+          <TabsContent value="history">
             <HistoryPage />
-          </TabsContent> */}
+          </TabsContent>
         </Tabs>
       </div>
     </div>

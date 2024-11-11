@@ -1,56 +1,23 @@
 "use client";
 import { useEffect, useState } from "react";
-import getActiveRequest from "../actions/getActiveRequests";
 import { ActiveRequest } from "./ActiveRequest";
-import { useQuery } from "@tanstack/react-query";
-// import { requestTypeEnum } from "./RequestType";
+import { AxiosInstance } from "@yuemnoi/app/client/client";
 
 export default function ActionPage() {
-  const [activeRequestData, setActiveRequestData] = useState();
-  // const activeRequestData = [
-  //   {
-  //     id: "1",
-  //     itemName: "เครื่องคิดเลข",
-  //     borrowerUsername: "เจ้าของ น้องขิม",
-  //     lenderUserName: "Khimmoon",
-  //     imageUrl: "/next.svg",
-  //     type: requestTypeEnum.borrowing,
-  //   },
-  //   {
-  //     id: "2",
-  //     itemName: "เครื่องคิดเลข",
-  //     borrowerUsername: "เจ้าของ น้องขิม",
-  //     lenderUserName: "Khimmoon",
-  //     imageUrl: "/next.svg",
-  //     type: requestTypeEnum.lending,
-  //   },
-  // ];
+  const [activeRequestData, setActiveRequestData] = useState([]);
   useEffect(() => {
-    AxiosInstance.get("/reserves/active-requests")
-      .then((response) => {
-        setActiveRequestData(response.data);
-      })
-      .catch((error) => {
-        setErrorMap(error.message);
-      });
-    // const activeRequestData = async () => {
-    //   setActiveRequestData(await getActiveRequest());
-    // };
-    // activeRequestData();
+    const fetchData = async () => {
+      AxiosInstance.get("reserves/active-requests")
+        .then((response) => {
+          console.log(response);
+          setActiveRequestData(response.data.data || []);
+        })
+        .catch((error) => {
+          console.error("Error:", error.message);
+        });
+    };
+    fetchData();
   }, []);
-  console.log(activeRequestData);
-
-  // useQuery({
-  //   queryKey: [""],
-  //   queryFn: async () => {
-  //     const response = await fetch("/reserves/active-requests");
-  //     if (!response.ok) {
-  //       throw new Error("failed to fetch active requests");
-  //     }
-  //     console.log(response.status);
-  //     return response.json();
-  //   },
-  // });
 
   return (
     <div className="w-full min-h-screen">

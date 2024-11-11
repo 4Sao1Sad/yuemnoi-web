@@ -1,7 +1,7 @@
 //ReturnItemLendingRequest
 export default async function ReturnItemLendingRequest(requestId: number) {
   const response = await fetch(
-    `https://cd3b-184-22-33-12.ngrok-free.app/reserves/lending-requests/return/${requestId}`,
+    `https://2ec3-184-22-33-12.ngrok-free.app/reserves/lending-requests/return/${requestId}`,
     {
       method: "POST",
       headers: {

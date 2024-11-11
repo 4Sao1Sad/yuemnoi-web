@@ -8,6 +8,7 @@ import AllPostsPage from "./AllPostsPage";
 
 export default function RequestPage() {
   const [requestState, setRequestState] = useState(true);
+
   return (
     <div className="w-full min-h-screen">
       <Button className="w-full" onClick={() => setRequestState(!requestState)}>

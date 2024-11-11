@@ -1,10 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from "@yuemnoi/components/ui/button";
 import { requestTypeEnum } from "../enum/RequestType";
-import Image from "next/image";
-import ReturnItemBorrowingRequest from "../actions/returnItemBorrowingRequest";
-import ReturnItemLendingRequest from "../actions/returnItemLendingRequest";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { AxiosInstance } from "@yuemnoi/app/client/client";
 
 interface ActiveRequestProp {
   requset_type: string;
@@ -18,67 +15,40 @@ interface ActiveRequestProp {
   borrower: string;
 }
 
+interface requestId {
+  lending: number;
+  borrowing: number;
+}
 // get my active request
 
-export function ActiveRequest({
-  data,
-}: {
-  data: ActiveRequestProp[] | undefined;
-}) {
-  // const mockData = {
-  //   data: [
-  //     {
-  //       requset_type: "Borrowing request",
-  //       id: 3,
-  //       borrowing_user_id: 1,
-  //       lending_user_id: 2,
-  //       post_id: 1,
-  //       role: "borrower",
-  //       post: {
-  //         id: 1,
-  //         description: "testAgain",
-  //         active_status: true,
-  //         owner_id: 2,
-  //         owner_name: "Premika",
-  //         updated_at: {
-  //           seconds: 1730726460,
-  //           nanos: 607403000,
-  //         },
-  //       },
-  //       borrower: "bolona",
-  //     },
-  //     {
-  //       requset_type: "Borrowing request",
-  //       id: 3,
-  //       borrowing_user_id: 1,
-  //       lending_user_id: 2,
-  //       post_id: 1,
-  //       role: "borrower",
-  //       post: {
-  //         id: 1,
-  //         description: "testAgain",
-  //         active_status: true,
-  //         owner_id: 2,
-  //         owner_name: "Premika",
-  //         updated_at: {
-  //           seconds: 1730726460,
-  //           nanos: 607403000,
-  //         },
-  //       },
-  //       borrower: "bolona",
-  //     },
-  //   ],
-  // };
+export function ActiveRequest({ data }: { data: ActiveRequestProp[] }) {
+  const [returned, setReturned] = useState<requestId>();
 
   useEffect(() => {
-    const returnItem = async (id: number) => {
-      await ReturnItemBorrowingRequest(id);
-      await ReturnItemLendingRequest(id);
+    const returnItem = async (
+      lending_request_id: number,
+      borrowing_request_id: number
+    ) => {
+      AxiosInstance.post(`reserves/active-requests${lending_request_id}`)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.error("Error:", error.message);
+        });
+      AxiosInstance.post(`reserves/active-requests${borrowing_request_id}`)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.error("Error:", error.message);
+        });
     };
-  }, []);
+    returnItem(returned?.lending || 0, returned?.borrowing || 0);
+  }, [returned]);
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
-      {data?.map(({ id, borrower, post, requset_type }, index) => {
+      {data.map(({ id, borrower, post, requset_type }) => {
         return (
           <div
             key={id}
@@ -110,7 +80,7 @@ export function ActiveRequest({
               <Button
                 className="w-full"
                 onClick={() => {
-                  // returnItem();
+                  setReturned({ lending: id, borrowing: post.id });
                 }}
               >
                 Mark Return

@@ -1,7 +1,7 @@
 //AcceptLendingRequest
 export default async function AcceptLendingRequest(requestId: number) {
   const response = await fetch(
-    `https://cd3b-184-22-33-12.ngrok-free.app/reserves/lending-requests/accept/${requestId}`,
+    `https://2ec3-184-22-33-12.ngrok-free.app/reserves/lending-requests/accept/${requestId}`,
     {
       method: "POST",
       headers: {

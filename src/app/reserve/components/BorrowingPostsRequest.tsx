@@ -3,11 +3,12 @@ import { borrowStatusEnum } from "../enum/BorrowStatusEnum";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import GetBorrowingPostsById from "../actions/getBorrowingPostsById";
+import { AxiosInstance } from "@yuemnoi/app/client/client";
 interface BorrowingPostRequestProp {
   id: string;
-  itemName: string;
-  lenderUserName: string;
-  imageUrl: string;
+  item_name: string;
+  lender_username: string;
+  image_url: string;
   borrowStatus: borrowStatusEnum;
 }
 export default function BorrowingPostsRequest({ postId }: { postId: number }) {
@@ -17,7 +18,14 @@ export default function BorrowingPostsRequest({ postId }: { postId: number }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      setBorrowingPostRequestData(await GetBorrowingPostsById(postId));
+      AxiosInstance.get("posts/lending-posts/me")
+        .then((response) => {
+          console.log(response);
+          setBorrowingPostRequestData(response.data.data || []);
+        })
+        .catch((error) => {
+          console.error("Error:", error.message);
+        });
     };
     fetchData();
   }, []);

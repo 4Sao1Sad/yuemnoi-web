@@ -1,7 +1,7 @@
 //RejectBorrowingRequest
 export default async function RejectBorrowingRequest(requestId: number) {
   const response = await fetch(
-    `https://cd3b-184-22-33-12.ngrok-free.app/reserves/borrowing-requests/reject/${requestId}`,
+    `https://2ec3-184-22-33-12.ngrok-free.app/reserves/borrowing-requests/reject/${requestId}`,
     {
       method: "POST",
       headers: {

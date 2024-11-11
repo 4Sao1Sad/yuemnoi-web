@@ -14,7 +14,7 @@ export default async function GetMyLendingPosts(): Promise<
   RequestHistoryProp[]
 > {
   const response = await fetch(
-    `https://cd3b-184-22-33-12.ngrok-free.app/reserves/history-requests`,
+    `https://2ec3-184-22-33-12.ngrok-free.app/reserves/history-requests`,
     {
       headers: {
         cookies_google_auth:

@@ -1,32 +1,26 @@
-import getMyHistoryRequests from "../actions/getMyHistoryRequests";
+import { useEffect, useState } from "react";
 import RequestHistory from "./RequestHistory";
+import { AxiosInstance } from "@yuemnoi/app/client/client";
 
-export default async function HistoryPage() {
-  // const requestHistoryData = [
-  //   {
-  //     id: "1",
-  //     itemName: "เครื่องคิดเลข",
-  //     name: "เจ้าของ",
-  //     surname: "น้องขิม",
-  //     lenderUserName: "เนยเน่ยเน้ยเน๊ยเน๋ย",
-  //     imageUrl: "/next.svg",
-  //     activeStatus: activeStatusEnum.accepted,
-  //   },
-  //   {
-  //     id: "2",
-  //     itemName: "เครื่องคิดเลข",
-  //     name: "เจ้าของ",
-  //     surname: "น้องขิม",
-  //     lenderUserName: "เนยเน่ยเน้ยเน๊ยเน๋ย",
-  //     imageUrl: "/next.svg",
-  //     activeStatus: activeStatusEnum.rejected,
-  //   },
-  // ];
+export default function HistoryPage() {
+  const [requestHistory, setRequestHistory] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      AxiosInstance.get("reserves/history-requests")
+        .then((response) => {
+          console.log(response);
+          setRequestHistory(response.data.data || []);
+        })
+        .catch((error) => {
+          console.error("Error:", error.message);
+        });
+    };
+    fetchData();
+  }, []);
 
-  const requestHistoryData = await getMyHistoryRequests();
   return (
     <div className="w-full min-h-screen">
-      <RequestHistory data={requestHistoryData}></RequestHistory>
+      <RequestHistory data={requestHistory}></RequestHistory>
     </div>
   );
 }

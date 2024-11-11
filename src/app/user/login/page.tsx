@@ -1,6 +1,6 @@
 export default function Page() {
   return (
-    <a href="https://2ec3-184-22-33-12.ngrok-free.app/auth/google/login">
+    <a href="https://beb0-3-86-163-168.ngrok-free.app/auth/google/login">
       Login with Google
     </a>
   );
