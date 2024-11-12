@@ -18,9 +18,26 @@ import { AxiosInstance } from "@yuemnoi/app/client/client";
 
 export default function BorrowingCard({ post, lendingPostRequestData }: { post: BorrowingPost, lendingPostRequestData: LendingPostOfferProp[] }) {
   const [isDialogOpen, setDialogOpen] = React.useState(false);
+  const [selected, setSelected] = React.useState("");
   function handleConfirm() {
-    console.log("confirm");
+    if (!selected || !post.owner_id || !post.id) {
+      return;
+    }
+    AxiosInstance.post("/reserves/lending-requests/", {
+      borrowing_user_id: post.owner_id,
+      borrowing_post_id: post.id,
+      lending_post_id: lendingPostRequestData[0].id,
+
+    }).then((res) => {
+      console.log(res.data);
+    }).catch((err) => {
+      console.log(err);
+    }
+    )
     setDialogOpen(false);
+  }
+  function handleSelect(id: string) {
+    setSelected(id);
   }
   return (
     <Dialog open={isDialogOpen} >
@@ -35,7 +52,7 @@ export default function BorrowingCard({ post, lendingPostRequestData }: { post: 
           <DialogTitle>Select Your Lending Items</DialogTitle>
         </DialogHeader>
         <div className="h-[250px] overflow-scroll p-2">
-          <LendingOffer data={lendingPostRequestData} />
+          <LendingOffer data={lendingPostRequestData} setSelected={handleSelect} selected={selected} />
         </div>
 
         <DialogFooter className="flex flex-row gap-4">

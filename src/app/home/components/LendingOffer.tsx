@@ -10,18 +10,17 @@ export interface LendingPostOfferProp {
   lending_status: lendingStatusEnum;
 }
 export default function LendingOffer({
-  data,
+  data, setSelected, selected
 }: {
-  data: LendingPostOfferProp[];
+  data: LendingPostOfferProp[], setSelected: (id: string) => void, selected: string
 }) {
-  const [selected, setSelected] = useState("");
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
       {data.map(
         ({ id, item_name: itemName, owner_name: lenderUserName, image_url: imageUrl, lending_status: lendingStatus }) => {
           return (
             // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
-<div
+            <div
               key={id}
               className={
                 selected !== id
