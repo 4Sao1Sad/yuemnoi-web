@@ -12,7 +12,7 @@ import { AxiosInstance } from "@yuemnoi/app/client/client";
 import Image from "next/image";
 
 interface BorrowingPostProp {
-  id: string;
+  id: number;
   description: string;
   owner_name: string;
   created_at: string;
@@ -40,6 +40,7 @@ export default function BorrowingPost({ data }: { data: BorrowingPostProp[] }) {
   const [borrowingPostRequestData, setBorrowingPostRequestData] =
     useState<BorrowingPostRequestProp[]>();
   const [selected, setSelected] = useState<number>();
+  const [requestId, setRequestId] = useState<number>();
 
   useEffect(() => {
     const accepted = async (lending_request_id: number) => {
@@ -58,9 +59,9 @@ export default function BorrowingPost({ data }: { data: BorrowingPostProp[] }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      AxiosInstance.get(`reserves/lending-requests/my-requests/${selected}`)
+      AxiosInstance.get(`reserves/lending-requests/my-requests/${requestId}`)
         .then((response) => {
-          console.log(response);
+          console.log("data", response);
           setBorrowingPostRequestData(response.data.data || []);
         })
         .catch((error) => {
@@ -68,25 +69,19 @@ export default function BorrowingPost({ data }: { data: BorrowingPostProp[] }) {
         });
     };
     fetchData();
-  }, []);
-
-  // const borrowingPostRequestData = [
-  //   {
-  //     id: 1,
-  //     lending_post: {
-  //       id: 1,
-  //       item_name: "eiei",
-  //       owner_name: "wow",
-  //       image_url: "",
-  //     },
-  //   },
-  // ];
+  }, [requestId]);
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
       {data.map(({ id, description, owner_name, created_at }) => {
         return (
           <Dialog key={id}>
-            <DialogTrigger className="w-full ">
+            <DialogTrigger
+              className="w-full "
+              onClick={() => {
+                setRequestId(id);
+                console.log(id);
+              }}
+            >
               <div className="h-fit flex-1 flex-col justify-start items-start  px-4 py-3 space-y-2 shadow-lg rounded-lg hover:bg-slate-200">
                 <div className="flex flex-row justify-between">
                   <h2 className="text-sm font-bold">{`${owner_name}`}</h2>
@@ -114,7 +109,6 @@ export default function BorrowingPost({ data }: { data: BorrowingPostProp[] }) {
                               : "h-fit flex-1 flex-col justify-center items-start  px-4 py-3 space-y-2 shadow-lg rounded-lg bg-secondary-hover ring-2 ring-primary hover:cursor-pointer"
                           }
                           onClick={() => {
-                            console.log("select", id);
                             setSelected(id);
                           }}
                         >

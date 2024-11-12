@@ -1,7 +1,7 @@
 import { AxiosInstance } from "@yuemnoi/app/client/client";
 import { Button } from "@yuemnoi/components/ui/button";
 import { useEffect, useState } from "react";
-
+import Image from "next/image";
 interface LendingPostProp {
   id: number;
   item_name: string;
@@ -9,7 +9,7 @@ interface LendingPostProp {
   borrower: string;
   borrowing_post_id: number;
   lending_post_id: number;
-  // image_url: string;
+  image_url: string;
   post: {
     id: number;
     description: string;
@@ -63,19 +63,19 @@ export default function LendingPost({ data }: { data: LendingPostProp[] }) {
   }, [reject]);
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
-      {data.map(({ id, item_name, post, borrower }) => {
+      {data.map(({ id, post, borrower, image_url }) => {
         return (
           <div
             key={id}
             className="h-fit flex-1 flex-col justify-center items-start  px-4 py-3 space-y-2 shadow-lg rounded-lg"
           >
             <div className="flex flex-row  w-full items-center gap-4">
-              {/* <Image
-                src={`/${image_url}`}
+              <Image
+                src={image_url}
                 width={45}
                 height={45}
                 alt="imageUrl"
-              ></Image> */}
+              ></Image>
               <div className="flex flex-col">
                 <h1 className="line-clamp-1 break-all font-medium">
                   {post.description}
