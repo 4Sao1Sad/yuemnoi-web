@@ -13,14 +13,17 @@ import {
 import { Input } from "@yuemnoi/components/ui/input";
 import { AxiosInstance } from "@yuemnoi/app/client/client";
 import { useEffect, useState } from "react";
+import { useAuth } from "@yuemnoi/provider/AuthProvider";
 
 interface RequestHistoryProp {
   id: string;
   borrower: string;
   lenderUserName: string;
   borrowing_user_id: number;
+  lending_user_id: number;
   activeStatus: activeStatusEnum;
   is_reject: boolean;
+  requset_type: string;
   post: {
     item_name: string;
     description: string;
@@ -39,6 +42,7 @@ export default function RequestHistory({
 }: {
   data: RequestHistoryProp[];
 }) {
+  const user = useAuth();
   const [reviewData, setReviewData] = useState<reviewInstance>();
   const [rating, setRating] = useState(0);
   const [description, setDescription] = useState("");
@@ -75,6 +79,7 @@ export default function RequestHistory({
             post,
             borrower,
             borrowing_user_id,
+            lending_user_id,
             lenderUserName,
             is_reject,
             activeStatus,
@@ -117,7 +122,7 @@ export default function RequestHistory({
                   </div>
                 </div>
               </div>
-              {activeStatus == activeStatusEnum.accepted ? (
+              {!is_reject ? (
                 <Dialog>
                   <DialogTrigger className="w-full ">
                     <Button className="w-full">Review</Button>
@@ -148,7 +153,10 @@ export default function RequestHistory({
                             setReviewData({
                               rating: rating,
                               description: description,
-                              reviewee_id: borrowing_user_id,
+                              reviewee_id:
+                                user.id == lending_user_id
+                                  ? borrowing_user_id
+                                  : lending_user_id,
                             });
                           }}
                         >
