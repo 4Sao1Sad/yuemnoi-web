@@ -7,6 +7,8 @@ import { Toaster } from "sonner";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import AuthProvider from "@yuemnoi/provider/AuthProvider";
+import TanstackQueryProvider from "@yuemnoi/provider/TanstackQueryProvider";
+
 config.autoAddCss = false;
 
 const geistSans = localFont({
@@ -34,16 +36,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AuthProvider>
-          <NotificationProvider>
-            <Navbar />
-            <Toaster />
-            <div className="flex max-w-screen min-h-screen lg:px-[120px]">
-              {children}
-
-            </div>
-          </NotificationProvider>
-        </AuthProvider>
+        <TanstackQueryProvider>
+          <AuthProvider>
+            <NotificationProvider>
+              <Navbar />
+              <Toaster />
+              <div className="flex max-w-screen min-h-screen lg:px-[120px]">
+                {children}
+              </div>
+            </NotificationProvider>
+          </AuthProvider>
+        </TanstackQueryProvider>
       </body>
     </html>
   );
