@@ -33,10 +33,9 @@ export default function AllPostsPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      AxiosInstance.get("reserves/lending-requests/my-borrowing-posts")
+      AxiosInstance.get("posts/borrowing-posts/me")
         .then((response) => {
-          console.log(response);
-          setBorrowingPostData(response.data.data || []);
+          setBorrowingPostData(response.data || []);
         })
         .catch((error) => {
           console.error("Error:", error.message);

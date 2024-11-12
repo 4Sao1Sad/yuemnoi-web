@@ -45,8 +45,9 @@ interface LendingRequestProp {
 export default function LendingRequest({
   data,
 }: {
-  data: LendingRequestProp[] | undefined;
+  data: LendingRequestProp[];
 }) {
+  console.log("data", data);
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
       {data?.map(({ id, lending_post, borrowing_post }) => {
@@ -81,7 +82,6 @@ export default function LendingRequest({
                   {borrowing_post.owner_name}
                 </h2>
               </div>
-              <h2 className="text-sm line-clamp-1 break-all text-gray-400 ">{`Created At:   ${borrowing_post.created_at}`}</h2>
             </div>
             <h1 className="line-clamp-1 break-all">
               {borrowing_post.description}

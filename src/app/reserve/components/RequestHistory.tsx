@@ -77,7 +77,7 @@ export default function RequestHistory({
       reviewData?.description || "",
       reviewData?.reviewee_id || 0
     );
-  });
+  }, [reviewData]);
 
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">

@@ -29,14 +29,18 @@ export function ActiveRequest({ data }: { data: ActiveRequestProp[] }) {
       lending_request_id: number,
       borrowing_request_id: number
     ) => {
-      AxiosInstance.post(`reserves/active-requests${lending_request_id}`)
+      AxiosInstance.post(
+        `reserves/lending-requests/return/${lending_request_id}`
+      )
         .then((response) => {
           console.log(response);
         })
         .catch((error) => {
           console.error("Error:", error.message);
         });
-      AxiosInstance.post(`reserves/active-requests${borrowing_request_id}`)
+      AxiosInstance.post(
+        `reserves/borrowing-requests/return/${borrowing_request_id}`
+      )
         .then((response) => {
           console.log(response);
         })
