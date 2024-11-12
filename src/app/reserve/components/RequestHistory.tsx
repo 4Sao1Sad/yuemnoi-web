@@ -26,6 +26,7 @@ interface RequestHistoryProp {
   requset_type: string;
   post: {
     item_name: string;
+    owner_name: string;
     description: string;
     image_url: string;
   };
@@ -112,15 +113,19 @@ export default function RequestHistory({
                   </h1>
                   <div className="flex flex-row gap-2">
                     {is_reject ? (
-                      <h2 className="text-sm font-bold line-clamp-1 break-all text-primary">
-                        Rejected by
-                      </h2>
+                      <div className="flex flex-row gap-2">
+                        <h2 className="text-sm font-bold line-clamp-1 break-all text-primary">
+                          Rejected by
+                        </h2>
+                        <h2 className="text-sm font-bold line-clamp-1 break-all text-gray-500 ">
+                          {post.owner_name}
+                        </h2>
+                      </div>
                     ) : (
                       <h2 className="text-sm font-medium line-clamp-1 break-all text-gray-500">
-                        ยืมโดย
+                        {`ยืมโดย  ${borrower}`}
                       </h2>
                     )}
-                    <h2 className="text-sm font-medium line-clamp-1 break-all text-gray-500">{`${borrower}`}</h2>
                   </div>
                 </div>
               </div>
