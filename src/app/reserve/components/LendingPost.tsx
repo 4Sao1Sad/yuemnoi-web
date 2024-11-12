@@ -17,47 +17,40 @@ interface LendingPostProp {
   };
 }
 
-// resp = append(resp, &dto.LendingPost{
-//   Id:          uint64(post.ID),
-//   ItemName:    post.ItemName,
-//   Description: post.Description,
-//   Price:       post.Price,
-//   ImageURL:    post.ImageURL,
-//   OwnerId:     post.OwnerID,
-//   OwnerName:   post.OwnerName,
-//   CreatedAt:   post.CreatedAt,
-// })
-
 export default function LendingPost({ data }: { data: LendingPostProp[] }) {
   const [accept, setAccepted] = useState<number>(0);
   const [reject, setRejected] = useState<number>(0);
 
   useEffect(() => {
     const accepted = async (borrowing_request_id: number) => {
-      AxiosInstance.post(
-        `reserves/borrowing-requests/accept/${borrowing_request_id}`
-      )
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.error("Error:", error.message);
-        });
+      if (borrowing_request_id != 0) {
+        AxiosInstance.post(
+          `reserves/borrowing-requests/accept/${borrowing_request_id}`
+        )
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.error("Error:", error.message);
+          });
+      }
     };
     accepted(accept);
   }, [accept]);
 
   useEffect(() => {
     const rejected = async (borrowing_request_id: number) => {
-      AxiosInstance.post(
-        `reserves/borrowing-requests/reject/${borrowing_request_id}`
-      )
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.error("Error:", error.message);
-        });
+      if (borrowing_request_id != 0) {
+        AxiosInstance.post(
+          `reserves/borrowing-requests/reject/${borrowing_request_id}`
+        )
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.error("Error:", error.message);
+          });
+      }
     };
     rejected(reject);
   }, [reject]);

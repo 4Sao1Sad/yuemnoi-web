@@ -9,39 +9,12 @@ interface LendingRequestProp {
     image_url: string;
   };
   borrowing_post: {
+    item_name: string;
     owner_name: string;
     description: string;
     created_at: string;
   };
 }
-// response = append(response, dto.GetMyLendingRequestsResponse{
-//   ID:              request.ID,
-//   BorrowingUserID: request.BorrowingUserID,
-//   LendingUserID:   request.LendingUserID,
-//   BorrowingPostID: request.BorrowingPostID,
-//   LendingPostID:   request.LendingPostID,
-//   Status:          request.Status,
-//   ActiveStatus:    request.ActiveStatus,
-//   LendingPost:     lendingPosts.Posts[i],
-//   BorrowingPost:   borrowingPosts.BorrowingPost[i],
-// })
-// resp = append(resp, &dto.LendingPost{
-//   Id:          uint64(post.ID),
-//   ItemName:    post.ItemName,
-//   Description: post.Description,
-//   Price:       post.Price,
-//   ImageURL:    post.ImageURL,
-//   OwnerId:     post.OwnerID,
-//   OwnerName:   post.OwnerName,
-//   CreatedAt:   post.CreatedAt,
-// })
-// resp = append(resp, &dto.BorrowingPost{
-//   Id:          uint64(post.ID),
-//   OwnerId:     post.OwnerID,
-//   OwnerName:   post.OwnerName,
-//   Description: post.Description,
-//   CreatedAt:   post.CreatedAt,
-// })
 export default function LendingRequest({
   data,
 }: {

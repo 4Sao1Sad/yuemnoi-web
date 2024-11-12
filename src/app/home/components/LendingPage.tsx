@@ -1,6 +1,6 @@
 "use client";
 
-import React, { use, useEffect } from "react";
+import React, { useEffect } from "react";
 import LendingCard from "./LendingCard";
 import {
   Dialog,
@@ -13,7 +13,7 @@ import { Button } from "../../../components/ui/button";
 
 import type { LendingPost } from "../mockData";
 import { AxiosInstance } from "@yuemnoi/app/client/client";
-import { AuthContext, useAuth } from "@yuemnoi/provider/AuthProvider";
+import { useAuth } from "@yuemnoi/provider/AuthProvider";
 
 export default function LendingPage({ searchTerm }: { searchTerm: string }) {
   const user = useAuth();
@@ -22,7 +22,6 @@ export default function LendingPage({ searchTerm }: { searchTerm: string }) {
     null
   );
   const [lendingPosts, setLendingPosts] = React.useState<LendingPost[]>([]);
-
 
   const handleReserveClick = (post: LendingPost) => {
     setSelectedPost(post);
@@ -37,28 +36,33 @@ export default function LendingPage({ searchTerm }: { searchTerm: string }) {
   const handleConfirmReservation = () => {
     console.log(`Reserving item: ${selectedPost?.id}`);
 
-    AxiosInstance.post('/reserves/borrowing-requests', {
-      lending_user_id: user.id,
-      post_id: selectedPost?.id
-    }).then((res) => {
-      console.log(res.data);
-    }).catch((err) => {
-      console.log(err);
+    AxiosInstance.post("/reserves/borrowing-requests", {
+      lending_user_id: selectedPost?.owner_id,
+      post_id: selectedPost?.id,
     })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     handleCloseDialog();
   };
   useEffect(() => {
-    AxiosInstance.get(`/posts/lending-posts?search${searchTerm.toLocaleLowerCase()}`).then((res) => {
-      console.log(res.data);
-      setLendingPosts(res.data);
-    }).catch((err) => {
-      console.log(err);
-    })
+    AxiosInstance.get(
+      `/posts/lending-posts?search=${searchTerm.toLocaleLowerCase()}`
+    )
+      .then((res) => {
+        console.log(res.data);
+        setLendingPosts(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, [searchTerm]);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto w-fit gap-8">
-
       {lendingPosts.map((post) => (
         <LendingCard
           key={post.id}
@@ -96,4 +100,3 @@ export default function LendingPage({ searchTerm }: { searchTerm: string }) {
     </div>
   );
 }
-

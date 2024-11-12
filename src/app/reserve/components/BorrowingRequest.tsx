@@ -4,29 +4,11 @@ interface BorrowingRequestProp {
   status: string;
   post: {
     item_name: string;
+    description: string;
     image_url: string;
     owner_name: string;
   };
 }
-// response = append(response, dto.GetMyBorrowingRequestsResponse{
-//   ID:              request.ID,
-//   BorrowingUserID: request.BorrowingUserID,
-//   LendingUserID:   request.LendingUserID,
-//   PostID:          request.PostID,
-//   Status:          request.Status,
-//   ActiveStatus:    request.ActiveStatus,
-//   Post:            lendingPosts.Posts[i],
-// })
-// resp = append(resp, &dto.LendingPost{
-//   Id:          uint64(post.ID),
-//   ItemName:    post.ItemName,
-//   Description: post.Description,
-//   Price:       post.Price,
-//   ImageURL:    post.ImageURL,
-//   OwnerId:     post.OwnerID,
-//   OwnerName:   post.OwnerName,
-//   CreatedAt:   post.CreatedAt,
-// })
 export default function BorrowingRequest({
   data,
 }: {
@@ -50,7 +32,7 @@ export default function BorrowingRequest({
               ></Image>
               <div className="flex flex-col">
                 <h1 className="line-clamp-1 break-all font-medium">
-                  {post.item_name}
+                  {post.description}
                 </h1>
                 <div className="flex flex-row gap-2">
                   <h2 className="text-sm font-medium line-clamp-1 break-all text-gray-500">{`${post.owner_name}`}</h2>

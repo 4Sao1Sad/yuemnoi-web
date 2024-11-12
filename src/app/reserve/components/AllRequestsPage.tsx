@@ -4,40 +4,14 @@ import BorrowingRequest from "./BorrowingRequest";
 import LendingRequest from "./LendingRequest";
 import { AxiosInstance } from "@yuemnoi/app/client/client";
 
-interface BorrowingRequestProp {
-  id: string;
-  status: string;
-  post: {
-    item_name: string;
-    image_url: string;
-    owner_name: string;
-  };
-}
-interface LendingRequestProp {
-  id: string;
-  lending_post: {
-    item_name: string;
-    description: string;
-    owner_name: string;
-    image_url: string;
-  };
-  borrowing_post: {
-    owner_name: string;
-    description: string;
-    created_at: string;
-  };
-}
-
 export default function AllRequestsPage() {
-  const [borrowingData, setBorrowingData] = useState<BorrowingRequestProp[]>(
-    []
-  );
-  const [lendingData, setLendingData] = useState<LendingRequestProp[]>([]);
+  const [borrowingData, setBorrowingData] = useState([]);
+  const [lendingData, setLendingData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       AxiosInstance.get("reserves/borrowing-requests/my-requests")
         .then((response) => {
-          console.log(response);
+          console.log("borrowing", response);
           setBorrowingData(response.data.data || []);
         })
         .catch((error) => {
@@ -45,7 +19,7 @@ export default function AllRequestsPage() {
         });
       AxiosInstance.get("reserves/lending-requests/my-requests")
         .then((response) => {
-          console.log(response);
+          console.log("lending", response);
           setLendingData(response.data.data || []);
         })
         .catch((error) => {

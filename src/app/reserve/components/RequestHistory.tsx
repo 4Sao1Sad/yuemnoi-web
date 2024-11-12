@@ -21,8 +21,10 @@ interface RequestHistoryProp {
   image_url: string;
   borrowing_user_id: number;
   activeStatus: activeStatusEnum;
+  is_reject: boolean;
   post: {
     item_name: string;
+    description: string;
   };
 }
 
@@ -31,18 +33,6 @@ interface reviewInstance {
   description: string;
   reviewee_id: number;
 }
-
-// response = append(response, dto.HistoryRequestResponse{
-//   RequestType:     dto.BorrowingRequest,
-//   ID:              request.ID,
-//   BorrowingUserID: request.BorrowingUserID,
-//   LendingUserID:   request.LendingUserID,
-//   PostID:          request.PostID,
-//   IsReject:        isReject,
-//   Post:            lendingPosts.Posts[i],
-//   Borrower:        name,
-// })
-// getHistory
 
 export default function RequestHistory({
   data,
@@ -58,12 +48,10 @@ export default function RequestHistory({
       description: string,
       reviewee_id: number
     ) => {
-      AxiosInstance.post(`/users/review/`, {
-        body: {
-          rating: rating,
-          description: description,
-          reviewee_id: reviewee_id,
-        },
+      AxiosInstance.post(`/review`, {
+        rating: rating,
+        description: description,
+        reviewee_id: reviewee_id,
       })
         .then((response) => {
           console.log(response);
@@ -89,6 +77,7 @@ export default function RequestHistory({
           borrowing_user_id,
           lenderUserName,
           image_url,
+          is_reject,
           activeStatus,
         }) => {
           return (
@@ -111,10 +100,10 @@ export default function RequestHistory({
                 ></Image>
                 <div className="flex flex-col">
                   <h1 className="line-clamp-1 break-all font-medium">
-                    {post.item_name}
+                    {post.description}
                   </h1>
                   <div className="flex flex-row gap-2">
-                    {activeStatus == activeStatusEnum.rejected ? (
+                    {is_reject ? (
                       <h2 className="text-sm font-bold line-clamp-1 break-all text-primary">
                         Rejected by
                       </h2>

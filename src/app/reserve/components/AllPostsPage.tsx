@@ -3,29 +3,6 @@ import { useEffect, useState } from "react";
 import BorrowingPost from "./BorrowingPost";
 import LendingPost from "./LendingPost";
 import { AxiosInstance } from "@yuemnoi/app/client/client";
-// interface BorrowingPostProp {
-//   id: string;
-//   description: string;
-//   name: string;
-//   surname: string;
-//   createdAt: string;
-// }
-// interface LendingPostProp {
-//   id: string;
-//   itemName: string;
-//   name: string;
-//   surname: string;
-//   borrowerUserName: string;
-//   imageUrl: string;
-// }
-
-// resp = append(resp, &dto.BorrowingPost{
-//   Id:          uint64(post.ID),
-//   OwnerId:     post.OwnerID,
-//   OwnerName:   post.OwnerName,
-//   Description: post.Description,
-//   CreatedAt:   post.CreatedAt,
-// })
 
 export default function AllPostsPage() {
   const [borrowingPostData, setBorrowingPostData] = useState([]);
@@ -42,7 +19,7 @@ export default function AllPostsPage() {
         });
       AxiosInstance.get("reserves/borrowing-requests/my-lending-posts")
         .then((response) => {
-          console.log(response);
+          console.log("lending", response);
           setLendingPostData(response.data.data || []);
         })
         .catch((error) => {
