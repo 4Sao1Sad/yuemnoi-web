@@ -23,11 +23,19 @@ import {
   DialogOverlay,
   DialogHeader,
 } from "../../components/ui/dialog";
+import { AxiosInstance } from "../client/client";
+import { parse } from "path";
 
 export default function HomePage() {
   const [isDialogOpen, setDialogOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("lending");
   const [searchTerm, setSearchTerm] = useState("");
+
+  // State for form fields
+  const [itemName, setItemName] = useState("");
+  const [description, setDescription] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [price, setPrice] = useState(0);
 
   const handleCreateClick = () => {
     setDialogOpen(true);
@@ -35,6 +43,45 @@ export default function HomePage() {
 
   const handleCloseDialog = () => {
     setDialogOpen(false);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (activeTab === "lending") {
+      if (!itemName || !description || !imageUrl || !price) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+      AxiosInstance.post("/posts/lending-posts", {
+        item_name: itemName,
+        description,
+        image_url: imageUrl,
+        price: price,
+      }).then((res) => {
+        console.log("borrowing post created");
+        console.log(res.data);
+      }).catch((err) => {
+        console.log(err);
+      });
+      // Handle lending form submission here (e.g., send data to server)
+    } else {
+      if (!description) {
+        alert("Please provide a description.");
+        return;
+      }
+      AxiosInstance.post("/posts/borrowing-posts", {
+        description,
+      }).then((res) => {
+        console.log(res.data);
+        console.log("lending post created");
+      }).catch((err) => {
+        console.log(err);
+      });
+      // Handle borrowing form submission here
+    }
+
+    handleCloseDialog();
   };
 
   return (
@@ -97,7 +144,7 @@ export default function HomePage() {
                 </>
               )}
             </DialogHeader>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
               {activeTab === "lending" ? (
                 <>
                   <div>
@@ -108,6 +155,8 @@ export default function HomePage() {
                       type="text"
                       placeholder="Name"
                       id="itemName"
+                      value={itemName}
+                      onChange={(e) => setItemName(e.target.value)}
                       required
                       className="mb-4"
                     />
@@ -119,6 +168,8 @@ export default function HomePage() {
                     <Textarea
                       placeholder="Description"
                       id="description"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
                       required
                     />
                   </div>
@@ -127,9 +178,10 @@ export default function HomePage() {
                       Image URL
                     </label>
                     <Input
-                      type="url"
                       placeholder="Image URL"
                       id="imageUrl"
+                      value={imageUrl}
+                      onChange={(e) => setImageUrl(e.target.value)}
                       required
                       className="mb-4"
                     />
@@ -142,6 +194,8 @@ export default function HomePage() {
                       type="number"
                       placeholder="Price"
                       id="price"
+                      value={price}
+                      onChange={(e) => setPrice(Number.parseFloat(e.target.value))}
                       step="0.5"
                       required
                       className="mb-4"
@@ -151,31 +205,33 @@ export default function HomePage() {
               ) : (
                 <div>
                   <Textarea
-                    placeholder="Write what you're looking for!"
+                    placeholder="Write what you're looking for! "
                     id="description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    className="resize-none"
                     required
                   />
                 </div>
               )}
-            </form>
-            <DialogFooter className="flex flex-row gap-4">
               <Button
                 onClick={handleCloseDialog}
                 variant="outline"
                 size="default"
                 className="mt-2 w-full"
+                type="button"
               >
                 Close
               </Button>
               <Button
-                onClick={handleCloseDialog}
                 variant="default"
                 size="default"
                 className="mt-2 w-full"
+                type="submit"
               >
                 Create
               </Button>
-            </DialogFooter>
+            </form>
           </DialogContent>
         </DialogPortal>
       </Dialog>

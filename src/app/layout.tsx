@@ -6,6 +6,7 @@ import { NotificationProvider } from "@yuemnoi/provider/NotificationProvider";
 import { Toaster } from "sonner";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import AuthProvider from "@yuemnoi/provider/AuthProvider";
 import TanstackQueryProvider from "@yuemnoi/provider/TanstackQueryProvider";
 
 config.autoAddCss = false;
@@ -36,11 +37,15 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <TanstackQueryProvider>
-          <NotificationProvider>
-            <Navbar />
-            <Toaster />
-            {children}
-          </NotificationProvider>
+          <AuthProvider>
+            <NotificationProvider>
+              <Navbar />
+              <Toaster />
+              <div className="flex max-w-screen min-h-screen lg:px-[120px]">
+                {children}
+              </div>
+            </NotificationProvider>
+          </AuthProvider>
         </TanstackQueryProvider>
       </body>
     </html>

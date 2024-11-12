@@ -1,9 +1,15 @@
+"use client"
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+
 export default function Home() {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push('/home');
+  }, [router]);
   return (
     <div>
-      <h1 className="w-full my-20 font-bold text-black text-4xl text-center">
-        YEUM NOI
-      </h1>
     </div>
   );
 }

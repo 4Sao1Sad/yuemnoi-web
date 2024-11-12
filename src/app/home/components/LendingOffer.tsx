@@ -1,13 +1,13 @@
 import Image from "next/image";
-import { lendingStatusEnum } from "./LendingStatusEnum";
+import type { lendingStatusEnum } from "./LendingStatusEnum";
 import { useState } from "react";
 
-interface LendingPostOfferProp {
+export interface LendingPostOfferProp {
   id: string;
-  itemName: string;
-  lenderUserName: string;
-  imageUrl: string;
-  lendingStatus: lendingStatusEnum;
+  item_name: string;
+  owner_name: string;
+  image_url: string;
+  lending_status: lendingStatusEnum;
 }
 export default function LendingOffer({
   data,
@@ -18,12 +18,13 @@ export default function LendingOffer({
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
       {data.map(
-        ({ id, itemName, lenderUserName, imageUrl, lendingStatus }, index) => {
+        ({ id, item_name: itemName, owner_name: lenderUserName, image_url: imageUrl, lending_status: lendingStatus }) => {
           return (
-            <div
+            // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+<div
               key={id}
               className={
-                selected != id
+                selected !== id
                   ? "h-fit flex-1 flex-col justify-center items-start  px-4 py-3 space-y-2 shadow-lg rounded-lg hover:bg-secondary-hover hover:ring-2 hover:ring-primary hover:cursor-pointer"
                   : "h-fit flex-1 flex-col justify-center items-start  px-4 py-3 space-y-2 shadow-lg rounded-lg bg-secondary-hover ring-2 ring-primary hover:cursor-pointer"
               }
@@ -31,11 +32,11 @@ export default function LendingOffer({
             >
               <div className="flex flex-row  w-full items-center gap-4">
                 <Image
-                  src={imageUrl}
+                  src={"/next.svg"}
                   width={45}
                   height={45}
                   alt="imageUrl"
-                ></Image>
+                />
                 <div className="flex flex-col">
                   <h1 className="line-clamp-1 break-all font-medium">
                     {itemName}

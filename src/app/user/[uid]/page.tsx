@@ -1,11 +1,27 @@
 "use client"
-import { Button } from "@yuemnoi/components/ui/button";
+import { useEffect, useState } from "react";
 import EditProfileDialog from "../components/EditProfileDialog";
-import UserRecentReview from "../components/UserRecentReviews";
+import UserRecentReview, { type UserRecentReviewProp } from "../components/UserRecentReviews";
+import { AxiosInstance } from "@yuemnoi/app/client/client";
+import { useAuth } from "@yuemnoi/provider/AuthProvider";
 export default function UserPage() {
-  const name = "Bruce";
-  const surname = "nun";
-  const email = "bruce@hotmail.com"
+  const user = useAuth();
+  const [reviews, setReviews] = useState<UserRecentReviewProp[]>([])
+  useEffect(() => {
+    if (!user.id) return;
+    AxiosInstance.get(`/reviews/user/${user.id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.length === 0) {
+        return;
+      }
+      setReviews(res.data);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }, [user.id])
+  const name = user.name;
+  const surname = user.surname;
+  const email = user.email
   const description = "This is a description of the user profile review page."
   const score = 0;
   const data = [{ id: "1", name, surname, score, description },
@@ -26,13 +42,13 @@ export default function UserPage() {
       <div className="h-fit flex-1 flex-col justify-center items-start my-3 px-6 py-3 space-y-2 shadow-lg rounded-lg">
         <div className="flex flex-row justify-between w-full">
           <h2 className="text-lg font-semibold line-clamp-1 break-all ">{`${name}   ${surname}`}</h2>
-          <EditProfileDialog name="bruce" surname="nun" />
+          {user.id && <EditProfileDialog input={{ name, surname }} userid={user.id} />}
         </div>
         <h4 className="line-clamp-1 break-all h6">{`Contact:  ${email}`}</h4>
       </div>
       <hr className="w-full text-input-outline" />
       <h3 className="text-xl font-bold my-4">Recent Review</h3>
-      <UserRecentReview data={data} />
+      <UserRecentReview data={reviews} />
     </div>
 
   </div>

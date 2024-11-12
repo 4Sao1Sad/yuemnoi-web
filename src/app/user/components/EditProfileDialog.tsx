@@ -19,10 +19,11 @@ import { Button } from "@yuemnoi/components/ui/button"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
+import { set, useForm } from "react-hook-form"
 import { z } from "zod"
 import { Input } from "@yuemnoi/components/ui/input"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { AxiosInstance } from "@yuemnoi/app/client/client"
 
 
 const formSchema = z.object({
@@ -36,7 +37,7 @@ const formSchema = z.object({
 
 
 
-export default function EditProfileDialog(input: typeof formSchema._input) {
+export default function EditProfileDialog({ input, userid }: { input: typeof formSchema._input, userid: number }) {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -45,7 +46,15 @@ export default function EditProfileDialog(input: typeof formSchema._input) {
         },
     })
     function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
+        AxiosInstance.patch(`/users/${userid}`, {
+            name: values.name,
+            surname: values.surname
+        }).then((res) => {
+            console.log(res);
+        }).catch((err) => {
+            console.log(err);
+        }   )
+        setDialogOpen(false)
     }
     const [dialogOpen, setDialogOpen] = useState(false)
     return <Dialog open={dialogOpen}>
