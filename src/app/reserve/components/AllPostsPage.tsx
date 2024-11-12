@@ -13,6 +13,7 @@ export default function AllPostsPage() {
       AxiosInstance.get("posts/borrowing-posts/me")
         .then((response) => {
           setBorrowingPostData(response.data || []);
+          console.log("borrowing", response);
         })
         .catch((error) => {
           console.error("Error:", error.message);

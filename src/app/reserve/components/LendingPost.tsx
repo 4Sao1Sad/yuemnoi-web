@@ -9,11 +9,11 @@ interface LendingPostProp {
   borrower: string;
   borrowing_post_id: number;
   lending_post_id: number;
-  image_url: string;
   post: {
     id: number;
     description: string;
     owner_name: string;
+    image_url: string;
   };
 }
 
@@ -56,7 +56,7 @@ export default function LendingPost({ data }: { data: LendingPostProp[] }) {
   }, [reject]);
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
-      {data.map(({ id, post, borrower, image_url }) => {
+      {data.map(({ id, post, borrower }) => {
         return (
           <div
             key={id}
@@ -64,7 +64,7 @@ export default function LendingPost({ data }: { data: LendingPostProp[] }) {
           >
             <div className="flex flex-row  w-full items-center gap-4">
               <Image
-                src={image_url}
+                src={post.image_url}
                 width={45}
                 height={45}
                 alt="imageUrl"

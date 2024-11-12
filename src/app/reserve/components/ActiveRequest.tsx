@@ -56,16 +56,14 @@ export function ActiveRequest({ data }: { data: ActiveRequestProp[] }) {
   }, [returned]);
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
-      {data.map(({ id, borrower, post, requset_type }) => {
+      {data.map(({ id, borrower, role, post, requset_type }) => {
         return (
           <div
             key={id}
             className="h-fit flex-1 flex-col justify-center items-start  px-4 py-3 space-y-2 shadow-lg rounded-lg"
           >
             <h2 className="text-xs font-medium">
-              {requset_type == requestTypeEnum.lending
-                ? `${borrower} กำลังยืม..`
-                : "ฉันกำลังยืม.."}
+              {role == "lender" ? `${borrower} กำลังยืม..` : "ฉันกำลังยืม.."}
             </h2>
 
             <div className="flex flex-row  w-full items-center gap-4">

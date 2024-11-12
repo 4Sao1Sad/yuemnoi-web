@@ -9,7 +9,7 @@ export default function ActionPage() {
     const fetchData = async () => {
       AxiosInstance.get("reserves/active-requests")
         .then((response) => {
-          console.log(response);
+          console.log("active", response);
           setActiveRequestData(response.data.data || []);
         })
         .catch((error) => {

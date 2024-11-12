@@ -18,13 +18,13 @@ interface RequestHistoryProp {
   id: string;
   borrower: string;
   lenderUserName: string;
-  image_url: string;
   borrowing_user_id: number;
   activeStatus: activeStatusEnum;
   is_reject: boolean;
   post: {
     item_name: string;
     description: string;
+    image_url: string;
   };
 }
 
@@ -76,7 +76,6 @@ export default function RequestHistory({
           borrower,
           borrowing_user_id,
           lenderUserName,
-          image_url,
           is_reject,
           activeStatus,
         }) => {
@@ -93,7 +92,7 @@ export default function RequestHistory({
 
               <div className="flex flex-row  w-full items-center gap-4">
                 <Image
-                  src={image_url}
+                  src={post.image_url}
                   width={45}
                   height={45}
                   alt="imageUrl"
