@@ -47,28 +47,30 @@ export default function RequestHistory({
   const [rating, setRating] = useState(0);
   const [description, setDescription] = useState("");
   useEffect(() => {
-    const createReview = async (
-      rating: number,
-      description: string,
-      reviewee_id: number
-    ) => {
-      AxiosInstance.post(`/reviews`, {
-        rating: rating,
-        description: description,
-        reviewee_id: reviewee_id,
-      })
-        .then((response) => {
-          console.log(response);
+    if (rating != 0) {
+      const createReview = async (
+        rating: number,
+        description: string,
+        reviewee_id: number
+      ) => {
+        AxiosInstance.post(`/reviews`, {
+          rating: rating,
+          description: description,
+          reviewee_id: reviewee_id,
         })
-        .catch((error) => {
-          console.error("Error:", error.message);
-        });
-    };
-    createReview(
-      reviewData?.rating || 0,
-      reviewData?.description || "",
-      reviewData?.reviewee_id || 0
-    );
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.error("Error:", error.message);
+          });
+      };
+      createReview(
+        reviewData?.rating || 0,
+        reviewData?.description || "",
+        reviewData?.reviewee_id || 0
+      );
+    }
   }, [reviewData]);
 
   return (
