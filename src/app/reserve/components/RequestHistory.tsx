@@ -48,7 +48,7 @@ export default function RequestHistory({
       description: string,
       reviewee_id: number
     ) => {
-      AxiosInstance.post(`/review`, {
+      AxiosInstance.post(`/reviews`, {
         rating: rating,
         description: description,
         reviewee_id: reviewee_id,
@@ -70,18 +70,20 @@ export default function RequestHistory({
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
       {data.map(
-        ({
-          id,
-          post,
-          borrower,
-          borrowing_user_id,
-          lenderUserName,
-          is_reject,
-          activeStatus,
-        }) => {
+        (
+          {
+            post,
+            borrower,
+            borrowing_user_id,
+            lenderUserName,
+            is_reject,
+            activeStatus,
+          },
+          index
+        ) => {
           return (
             <div
-              key={id}
+              key={index}
               className="h-fit flex-1 flex-col justify-center items-start  px-4 py-3 space-y-2 shadow-lg rounded-lg"
             >
               <h2 className="text-xs font-medium">
@@ -142,13 +144,13 @@ export default function RequestHistory({
                       </DialogClose>
                       <DialogClose>
                         <Button
-                          onClick={() =>
+                          onClick={() => {
                             setReviewData({
                               rating: rating,
                               description: description,
                               reviewee_id: borrowing_user_id,
-                            })
-                          }
+                            });
+                          }}
                         >
                           Create
                         </Button>

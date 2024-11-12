@@ -11,7 +11,7 @@ export default function AllRequestsPage() {
     const fetchData = async () => {
       AxiosInstance.get("reserves/borrowing-requests/my-requests")
         .then((response) => {
-          console.log("borrowing", response);
+          console.log(response);
           setBorrowingData(response.data.data || []);
         })
         .catch((error) => {
@@ -19,7 +19,7 @@ export default function AllRequestsPage() {
         });
       AxiosInstance.get("reserves/lending-requests/my-requests")
         .then((response) => {
-          console.log("lending", response);
+          console.log(response);
           setLendingData(response.data.data || []);
         })
         .catch((error) => {

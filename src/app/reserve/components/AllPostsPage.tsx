@@ -13,14 +13,14 @@ export default function AllPostsPage() {
       AxiosInstance.get("posts/borrowing-posts/me")
         .then((response) => {
           setBorrowingPostData(response.data || []);
-          console.log("borrowing", response);
+          console.log(response);
         })
         .catch((error) => {
           console.error("Error:", error.message);
         });
       AxiosInstance.get("reserves/borrowing-requests/my-lending-posts")
         .then((response) => {
-          console.log("lending", response);
+          console.log(response);
           setLendingPostData(response.data.data || []);
         })
         .catch((error) => {

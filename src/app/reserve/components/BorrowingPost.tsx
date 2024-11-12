@@ -38,7 +38,7 @@ export default function BorrowingPost({ data }: { data: BorrowingPostProp[] }) {
   useEffect(() => {
     const accepted = async (lending_request_id: number) => {
       if (lending_request_id != 0) {
-        AxiosInstance.get(
+        AxiosInstance.post(
           `reserves/lending-requests/accept/${lending_request_id}`
         )
           .then((response) => {
@@ -57,7 +57,7 @@ export default function BorrowingPost({ data }: { data: BorrowingPostProp[] }) {
       const fetchData = async () => {
         AxiosInstance.get(`reserves/lending-requests/my-requests/${requestId}`)
           .then((response) => {
-            console.log("test", response);
+            console.log("lending-request", response);
             setBorrowingPostRequestData(response.data.data || []);
           })
           .catch((error) => {
@@ -70,9 +70,9 @@ export default function BorrowingPost({ data }: { data: BorrowingPostProp[] }) {
 
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
-      {data.map(({ id, description, owner_name, created_at }) => {
+      {data.map(({ id, description, owner_name, created_at }, index) => {
         return (
-          <Dialog key={id}>
+          <Dialog key={index}>
             <DialogTrigger
               className="w-full "
               onClick={() => {

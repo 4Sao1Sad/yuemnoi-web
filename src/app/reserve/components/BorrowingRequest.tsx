@@ -17,10 +17,10 @@ export default function BorrowingRequest({
   console.log("data", data);
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
-      {data.map(({ id, post, status }) => {
+      {data.map(({ post, status }, index) => {
         return (
           <div
-            key={id}
+            key={index}
             className="h-fit flex-1 flex-col justify-center items-start  px-4 py-3 space-y-2 shadow-lg rounded-lg "
           >
             <div className="flex flex-row  w-full items-center gap-4">

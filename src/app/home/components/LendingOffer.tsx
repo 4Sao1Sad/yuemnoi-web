@@ -10,14 +10,24 @@ export interface LendingPostOfferProp {
   lending_status: lendingStatusEnum;
 }
 export default function LendingOffer({
-  data, setSelected, selected
+  data,
+  setSelected,
+  selected,
 }: {
-  data: LendingPostOfferProp[], setSelected: (id: string) => void, selected: string
+  data: LendingPostOfferProp[];
+  setSelected: (id: string) => void;
+  selected: string;
 }) {
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
       {data.map(
-        ({ id, item_name: itemName, owner_name: lenderUserName, image_url: imageUrl, lending_status: lendingStatus }) => {
+        ({
+          id,
+          item_name: itemName,
+          owner_name: lenderUserName,
+          image_url: imageUrl,
+          lending_status: lendingStatus,
+        }) => {
           return (
             // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
             <div
@@ -30,12 +40,7 @@ export default function LendingOffer({
               onClick={() => setSelected(id)}
             >
               <div className="flex flex-row  w-full items-center gap-4">
-                <Image
-                  src={"/next.svg"}
-                  width={45}
-                  height={45}
-                  alt="imageUrl"
-                />
+                <Image src={imageUrl} width={45} height={45} alt="imageUrl" />
                 <div className="flex flex-col">
                   <h1 className="line-clamp-1 break-all font-medium">
                     {itemName}

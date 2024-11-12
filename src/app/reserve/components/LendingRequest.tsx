@@ -23,10 +23,10 @@ export default function LendingRequest({
   console.log("data", data);
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
-      {data?.map(({ id, lending_post, borrowing_post }) => {
+      {data?.map(({ lending_post, borrowing_post }, index) => {
         return (
           <div
-            key={id}
+            key={index}
             className="h-fit flex-1 flex-col justify-center items-start  px-4 py-3 space-y-2 shadow-lg rounded-lg"
           >
             <h2 className="text-xs font-medium">ฉันกำลังเสนอ..</h2>

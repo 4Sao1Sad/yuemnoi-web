@@ -1,5 +1,4 @@
 import { Button } from "@yuemnoi/components/ui/button";
-import { requestTypeEnum } from "../enum/RequestType";
 import { useEffect, useState } from "react";
 import { AxiosInstance } from "@yuemnoi/app/client/client";
 import Image from "next/image";
@@ -16,50 +15,40 @@ interface ActiveRequestProp {
   borrower: string;
 }
 
-interface requestId {
-  lending: number;
-  borrowing: number;
-}
-
 export function ActiveRequest({ data }: { data: ActiveRequestProp[] }) {
-  const [returned, setReturned] = useState<requestId>();
-
+  const [returned, setReturned] = useState<number>(0);
+  const [requestType, setRequestType] = useState<string>("");
   useEffect(() => {
-    const returnItem = async (
-      lending_request_id: number,
-      borrowing_request_id: number
-    ) => {
-      if (lending_request_id != 0) {
-        AxiosInstance.post(
-          `reserves/lending-requests/return/${lending_request_id}`
-        )
-          .then((response) => {
-            console.log(response);
-          })
-          .catch((error) => {
-            console.error("Error:", error.message);
-          });
-      }
-      if (borrowing_request_id != 0) {
-        AxiosInstance.post(
-          `reserves/borrowing-requests/return/${borrowing_request_id}`
-        )
-          .then((response) => {
-            console.log(response);
-          })
-          .catch((error) => {
-            console.error("Error:", error.message);
-          });
+    const returnItem = async (id: number, request_type: string) => {
+      if (returned != 0) {
+        if (request_type == "Lending request") {
+          AxiosInstance.post(`reserves/lending-requests/return/${id}`)
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.error("Error:", error.message);
+            });
+        }
+        if (request_type == "Borrowing request") {
+          AxiosInstance.post(`reserves/borrowing-requests/return/${id}`)
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.error("Error:", error.message);
+            });
+        }
       }
     };
-    returnItem(returned?.lending || 0, returned?.borrowing || 0);
-  }, [returned]);
+    returnItem(returned, requestType);
+  }, [returned, requestType]);
   return (
     <div className="h-fit flex flex-1 flex-col space-y-4">
-      {data.map(({ id, borrower, role, post, requset_type }) => {
+      {data.map(({ id, borrower, role, post, requset_type }, index) => {
         return (
           <div
-            key={id}
+            key={index}
             className="h-fit flex-1 flex-col justify-center items-start  px-4 py-3 space-y-2 shadow-lg rounded-lg"
           >
             <h2 className="text-xs font-medium">
@@ -82,11 +71,14 @@ export function ActiveRequest({ data }: { data: ActiveRequestProp[] }) {
                 </div>
               </div>
             </div>
-            {requset_type == requestTypeEnum.lending ? (
+            {role == "lender" ? (
               <Button
                 className="w-full"
                 onClick={() => {
-                  setReturned({ lending: id, borrowing: post.id });
+                  setRequestType(requset_type);
+                  setReturned(id);
+                  console.log("id", id);
+                  console.log("request", requset_type);
                 }}
               >
                 Mark Return

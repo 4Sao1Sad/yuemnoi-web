@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import type { BorrowingPost } from "../mockData";
 import {
   Dialog,
@@ -12,11 +12,15 @@ import {
 } from "../../../components/ui/dialog";
 import { Button } from "@yuemnoi/components/ui/button";
 import LendingOffer, { type LendingPostOfferProp } from "./LendingOffer";
-import { lendingStatusEnum } from "./LendingStatusEnum";
-import { set } from "react-hook-form";
 import { AxiosInstance } from "@yuemnoi/app/client/client";
 
-export default function BorrowingCard({ post, lendingPostRequestData }: { post: BorrowingPost, lendingPostRequestData: LendingPostOfferProp[] }) {
+export default function BorrowingCard({
+  post,
+  lendingPostRequestData,
+}: {
+  post: BorrowingPost;
+  lendingPostRequestData: LendingPostOfferProp[];
+}) {
   const [isDialogOpen, setDialogOpen] = React.useState(false);
   const [selected, setSelected] = React.useState("");
   function handleConfirm() {
@@ -27,20 +31,20 @@ export default function BorrowingCard({ post, lendingPostRequestData }: { post: 
       borrowing_user_id: post.owner_id,
       borrowing_post_id: post.id,
       lending_post_id: lendingPostRequestData[0].id,
-
-    }).then((res) => {
-      console.log(res.data);
-    }).catch((err) => {
-      console.log(err);
-    }
-    )
+    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     setDialogOpen(false);
   }
   function handleSelect(id: string) {
     setSelected(id);
   }
   return (
-    <Dialog open={isDialogOpen} >
+    <Dialog open={isDialogOpen}>
       <DialogTrigger className="w-full " onClick={() => setDialogOpen(true)}>
         <div className="h-fit flex flex-col items-start px-4 py-3 space-y-2 shadow-lg rounded-lg mb-4">
           <p className="font-semibold text-start">{post.owner_name}</p>
@@ -52,7 +56,11 @@ export default function BorrowingCard({ post, lendingPostRequestData }: { post: 
           <DialogTitle>Select Your Lending Items</DialogTitle>
         </DialogHeader>
         <div className="h-[250px] overflow-scroll p-2">
-          <LendingOffer data={lendingPostRequestData} setSelected={handleSelect} selected={selected} />
+          <LendingOffer
+            data={lendingPostRequestData}
+            setSelected={handleSelect}
+            selected={selected}
+          />
         </div>
 
         <DialogFooter className="flex flex-row gap-4">

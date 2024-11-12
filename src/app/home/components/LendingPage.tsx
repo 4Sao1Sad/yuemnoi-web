@@ -37,7 +37,7 @@ export default function LendingPage({ searchTerm }: { searchTerm: string }) {
     console.log(`Reserving item: ${selectedPost?.id}`);
 
     AxiosInstance.post("/reserves/borrowing-requests", {
-      lending_user_id: selectedPost?.owner_id,
+      lending_user_id: user.id,
       post_id: selectedPost?.id,
     })
       .then((res) => {
