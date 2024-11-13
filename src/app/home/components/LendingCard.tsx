@@ -13,22 +13,24 @@ export default function LendingCard({
   onReserveClick: (post: LendingPost) => void;
 }) {
   return (
-    <div className="h-fit flex-1 flex-col justify-center w-[240px] items-start py-2 space-y-2 shadow-lg rounded-lg mb-4">
-      <Image
-        src={post.image_url}
-        alt={post.item_name}
-        width={0}
-        height={0}
-        className="rounded-t-lg"
-        style={{ width: "100%", height: "auto" }}
-      />
+    <div className="h-fit flex-1 flex-col justify-center w-[300px] items-start py-2 space-y-2 shadow-lg rounded-lg mb-4">
+      <div className="flex justify-center items-center w-full h-full">
+        <Image
+          src={post.image_url}
+          alt={post.item_name}
+          width={240}
+          height={240}
+          className="rounded-t-lg"
+        />
+
+      </div>
       <div className="gap-3 px-6 py-4 flex flex-col">
         <div className="gap-1 pb-1 flex flex-row justify-between border-b border-gray">
           <div className="flex flex-col">
-            <h3 className="font-semibold">{post.item_name}</h3>
+            <h3 className="font-semibold w-full line-clamp-1">{post.item_name}</h3>
             <p className="text-tiny text-gray">by {post.owner_name}</p>
           </div>
-          <div className="flex flex-row gap-1">
+          <div className="flex flex-row gap-1 min-w-[150px] justify-end">
             <h3 className="font-bold">{post.price} Baht</h3>
             <p className="text-body2 text-gray font-bold pt-0.5">/day</p>
           </div>

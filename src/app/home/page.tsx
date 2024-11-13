@@ -24,7 +24,6 @@ import {
   DialogHeader,
 } from "../../components/ui/dialog";
 import { AxiosInstance } from "../client/client";
-import { parse } from "path";
 
 export default function HomePage() {
   const [isDialogOpen, setDialogOpen] = useState(false);
